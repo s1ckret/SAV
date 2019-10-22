@@ -6,6 +6,12 @@
 // GLFW
 #include "GLFW/glfw3.h"
 
+#include "Graphics\IndexBuffer.h"
+#include "Graphics\Renderer.h"
+#include "Graphics\Shader.h"
+#include "Graphics\VertexArray.h"
+#include "Graphics\VertexBuffer.h"
+#include "Graphics\VertexBufferLayout.h"
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -51,17 +57,31 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);  
 	glViewport(0, 0, width, height);
 
+	Shader shader;
+	shader.SetFilePath("res/shaders/Basic.shader");
+
+	float positions[] =
+	{
+		-0.5f, -0.5f,
+		 0.5f, -0.5f,
+		 0.0f,  0.5f
+	};
+
+	VertexBufferLayout vbl;
+	vbl.Push<float>(2);
+	VertexBuffer vb;
+	vb.SetData(positions, 6 * sizeof(float));
+	VertexArray va;
+	va.AddBuffer(vb, vbl);
+
+	Renderer renderer;
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
-
-		// Render
-		// Clear the colorbuffer
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
+		renderer.Clear();
+		renderer.Draw(va, shader, 3);
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
 	}
