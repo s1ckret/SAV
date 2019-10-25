@@ -7,6 +7,7 @@
 
 struct ShaderProgram {
 	std::string VertexShader;
+	std::string GeometryShader;
 	std::string FragmentShader;
 };
 
@@ -23,7 +24,12 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
+	void setUniform1f(const std::string& name, float v0);
+	void setUniform2f(const std::string& name, float v0, float v1);
 	void setUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
+
+	void setUniform1ui(const std::string& name, unsigned int v0);
+	void setUniform1i(const std::string& name, int v0);
 
 	bool Loaded() const;
 private:
@@ -31,7 +37,7 @@ private:
 
 	ShaderProgram ParseShader(const std::string& filepath);
 	unsigned int CompileShader(unsigned int type, const std::string& source);
-	unsigned int CreateShader(const std::string & vertexShader, const std::string& fragmentShader);
+	unsigned int Shader::CreateShader(const std::string & vertexShader, const std::string& geometryShader, const std::string& fragmentShader);
 
 private:
 	std::string m_FilePath;

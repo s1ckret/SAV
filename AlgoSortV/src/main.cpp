@@ -77,17 +77,17 @@ int main()
 	Shader shader;
 	shader.SetFilePath("res/shaders/Basic.shader");
 
-	float positions[] =
+	const unsigned int size = 100;
+	const unsigned int max_value = 100;
+	int positions[size];
+	for (unsigned int i = 0; i < size; ++i)
 	{
-		-0.5f, -0.5f,
-		 0.5f, -0.5f,
-		 0.0f,  0.5f
-	};
-
+		positions[i] = rand() % (2 * max_value) - max_value;
+	}
 	VertexBufferLayout vbl;
-	vbl.Push<float>(2);
+	vbl.Push<float>(1);
 	VertexBuffer vb;
-	vb.SetData(positions, 6 * sizeof(float));
+	vb.SetData(positions, size * sizeof(int));
 	VertexArray va;
 	va.AddBuffer(vb, vbl);
 
@@ -95,14 +95,23 @@ int main()
 	bool show_demo_window = true;
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
+	
+	shader.Bind();
+	shader.setUniform1ui("arr_size", size);
+	shader.setUniform1i("max_value", max_value);
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
 		renderer.Clear();
-		renderer.Draw(va, shader, 3);
+		for (unsigned int i = 0; i < size; i++)
+		{
+			shader.Bind();
+			shader.setUniform1ui("i", i);
+			renderer.Draw(va, shader, i);
+
+		}
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();

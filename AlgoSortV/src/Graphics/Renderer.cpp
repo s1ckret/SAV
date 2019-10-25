@@ -25,9 +25,9 @@ void Renderer::Clear() const
 }
 
 
-void Renderer::Draw(const VertexArray & va, const Shader & shader, unsigned int vertex_count) const
+void Renderer::Draw(const VertexArray & va, const Shader & shader, unsigned int index) const
 {
 	va.Bind();
 	shader.Bind();
-	GLCall(glDrawArrays(GL_TRIANGLES, 0, vertex_count));
+	GLCall(glDrawArrays(GL_POINTS, index, 1));
 }
