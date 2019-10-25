@@ -6,6 +6,8 @@
 // GLFW
 #include "GLFW/glfw3.h"
 
+#include "Log.h"
+
 #include "Graphics\IndexBuffer.h"
 #include "Graphics\Renderer.h"
 #include "Graphics\Shader.h"
@@ -22,7 +24,8 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 // The MAIN function, from here we start the application and run the game loop
 int main()
 {
-	std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
+	Log::Init();
+	LOG_INFO("Starting GLFW context, OpenGL 3.3");
 	// Init GLFW
 	glfwInit();
 	// Set all the required options for GLFW
@@ -35,7 +38,7 @@ int main()
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);    
 	if (window == nullptr)
 	{
-		std::cout << "Failed to create GLFW window" << std::endl;
+		LOG_CRITICAL("Failed to create GLFW window");
 		glfwTerminate();
 		return -1;
 	}
@@ -48,7 +51,7 @@ int main()
 	// Initialize GLEW to setup the OpenGL Function pointers
 	if (glewInit() != GLEW_OK)
 	{
-		std::cout << "Failed to initialize GLEW" << std::endl;
+		LOG_CRITICAL("Failed to initialize GLEW");
 		return -1;
 	}    
 
@@ -56,6 +59,7 @@ int main()
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);  
 	glViewport(0, 0, width, height);
+
 
 	Shader shader;
 	shader.SetFilePath("res/shaders/Basic.shader");
