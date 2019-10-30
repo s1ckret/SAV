@@ -26,13 +26,25 @@ void SortProgram::GenerateMassive(unsigned int count)
 	}
 	for (unsigned int i = 0; i < count; i++)
 	{
-		mass_[i] = rand() % (2 * count) - count;
+		mass_[i] = 2 * i - count;
 	}
+	ShuffleMassive();
 }
 
 void SortProgram::Begin()
 {
 	thread_sort = std::move(std::thread(&ISort::Begin, sort_, std::ref(mass_), nElements_));
+}
+
+void SortProgram::ShuffleMassive()
+{
+	for (unsigned int i = 0; i < nElements_; i++)
+	{
+		unsigned int randomIndex = rand() % nElements_;
+		int temp = mass_[i];
+		mass_[i] = mass_[randomIndex];
+		mass_[randomIndex] = temp;
+	}
 }
 
 void SortProgram::Render(const Renderer & renderer)

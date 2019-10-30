@@ -28,6 +28,7 @@ public:
 	void GenerateMassive(unsigned int count);
 	void SetMethod(SortType sort);
 	void Begin();
+	void ShuffleMassive();
 	void Render(const Renderer& renderer);
 
 private:
