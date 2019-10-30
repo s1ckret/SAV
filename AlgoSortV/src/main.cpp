@@ -19,7 +19,7 @@
 #include "Graphics\VertexBuffer.h"
 #include "Graphics\VertexBufferLayout.h"
 
-
+#include "Sorts\SortProgram.h"
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -78,40 +78,27 @@ int main()
 	shader.SetFilePath("res/shaders/Basic.shader");
 
 	const unsigned int size = 100;
-	const unsigned int max_value = 100;
-	int positions[size];
-	for (unsigned int i = 0; i < size; ++i)
-	{
-		positions[i] = rand() % (2 * max_value) - max_value;
-	}
-	VertexBufferLayout vbl;
-	vbl.Push<float>(1);
-	VertexBuffer vb;
-	vb.SetData(positions, size * sizeof(int));
-	VertexArray va;
-	va.AddBuffer(vb, vbl);
+	
+	SortProgram sortProgram;
+	sortProgram.GenerateMassive(size);
+	sortProgram.SetMethod(SortType::BUBBLE);
 
 	Renderer renderer;
 	bool show_demo_window = true;
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	
-	shader.Bind();
-	shader.setUniform1ui("arr_size", size);
-	shader.setUniform1i("max_value", max_value);
+	sortProgram.Begin();
+
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
 		renderer.Clear();
-		for (unsigned int i = 0; i < size; i++)
-		{
-			shader.Bind();
-			shader.setUniform1ui("i", i);
-			renderer.Draw(va, shader, i);
+		sortProgram.Render(renderer);
 
-		}
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
