@@ -47,6 +47,7 @@ void SortProgram::GenerateMassive(const unsigned int nElements, const int max_va
 
 void SortProgram::Begin()
 {
+	Join();
 	thread_sort = std::move(std::thread(&ISort::Begin, sort_, std::ref(mass_), nElements_, std::ref(color_markers_)));
 }
 
@@ -74,5 +75,13 @@ void SortProgram::SetMethod(SortType sort)
 	if (!renderer_)
 	{
 		renderer_ = new SortRenderer(mass_, color_markers_, nElements_, max_value_);
+	}
+}
+
+void SortProgram::Join()
+{
+	if (thread_sort.joinable())
+	{
+		thread_sort.join();
 	}
 }

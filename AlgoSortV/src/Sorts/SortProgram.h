@@ -30,6 +30,7 @@ public:
 private:
 	SortProgram();
 	~SortProgram();
+	void Join();
 private:
 	int* mass_;
 	int max_value_;
