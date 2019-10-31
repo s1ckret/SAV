@@ -21,9 +21,6 @@
 
 #include "Sorts\SortProgram.h"
 
-// Function prototypes
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-
 // Window dimensions
 const GLuint WIDTH = 1200, HEIGHT = 800;
 
@@ -49,9 +46,6 @@ int main()
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-	// Set the required callback functions
-	glfwSetKeyCallback(window, key_callback);
-
 	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
 	// Initialize GLEW to setup the OpenGL Function pointers
@@ -73,9 +67,6 @@ int main()
 
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
-
-	Shader shader;
-	shader.SetFilePath("res/shaders/Basic.shader");
 
 	Renderer renderer;	
 	
@@ -143,12 +134,4 @@ int main()
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
 	return 0;
-}
-
-// Is called whenever a key is pressed/released via GLFW
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-	std::cout << key << std::endl;
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
 }

@@ -62,25 +62,29 @@ void MergeSort::Merge(int * mass, unsigned int left, unsigned int mid, unsigned 
 			j++;
 			color_markers_[mid + j].Set(1.f, 0.f, 0.f);
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 		k++;
 	}
 
 	// Copy the remaining elements
 	while (i < sizeLeft)
 	{
+		color_markers_[left + i].Set(1.f, 1.f, 1.f);
 		mass[k] = tempLeft[i];
 		i++;
 		k++;
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		color_markers_[left + i].Set(1.f, 0.f, 0.f);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	// Copy the remaining elements 
 	while (j < sizeRight)
 	{
+		color_markers_[mid + j].Set(1.f, 1.f, 1.f);
 		mass[k] = tempRight[j];
 		j++;
 		k++;
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		color_markers_[mid + j].Set(1.f, 0.f, 0.f);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	color_markers_[mid + j].Set(1.f, 1.f, 1.f);
 	color_markers_[left + i].Set(1.f, 1.f, 1.f);
