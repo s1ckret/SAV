@@ -5,18 +5,19 @@
 #include "Graphics\Shader.h"
 #include "Graphics\Renderer.h"
 
-class ISortRenderer
+#include "Sorts\ISort.h"
+
+class SortRenderer
 {
 public:
-	ISortRenderer(int * mass, unsigned int nElements);
-	virtual~ISortRenderer() = default;
+	SortRenderer(int * mass, Vec3 * color_markers, unsigned int nElements, int max_value);
 
-	virtual void Draw(const Renderer & renderer) = 0;
-private:
-	int FindMax();
+	void Draw(const Renderer & renderer);
 
 protected:
 	int * mass_;
+	Vec3 * color_markers_;
+	int max_value_;
 	unsigned int nElements_;
 
 	VertexBufferLayout vbl_;

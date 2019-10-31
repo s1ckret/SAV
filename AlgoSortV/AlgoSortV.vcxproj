@@ -131,8 +131,7 @@
     <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Graphics\Shader.cpp" />
-    <ClCompile Include="src\Graphics\SortRenders\BubbleSortRenderer.cpp" />
-    <ClCompile Include="src\Graphics\SortRenders\ISortRenderer.cpp" />
+    <ClCompile Include="src\Graphics\SortRenders\SortRenderer.cpp" />
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Log.cpp" />
@@ -152,8 +151,7 @@
     <ClInclude Include="src\Graphics\IndexBuffer.h" />
     <ClInclude Include="src\Graphics\Renderer.h" />
     <ClInclude Include="src\Graphics\Shader.h" />
-    <ClInclude Include="src\Graphics\SortRenders\BubbleSortRenderer.h" />
-    <ClInclude Include="src\Graphics\SortRenders\ISortRenderer.h" />
+    <ClInclude Include="src\Graphics\SortRenders\SortRenderer.h" />
     <ClInclude Include="src\Graphics\VertexArray.h" />
     <ClInclude Include="src\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Graphics\VertexBufferLayout.h" />

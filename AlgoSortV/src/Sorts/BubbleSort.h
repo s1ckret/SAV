@@ -5,6 +5,6 @@
 class BubbleSort : public ISort
 {
 public:
-	void Begin(int * mass, unsigned int nElements) override;
+	void Begin(int * mass, unsigned int nElements, Vec3* color_markers) override;
 
 };

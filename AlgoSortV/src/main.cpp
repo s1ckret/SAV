@@ -25,7 +25,7 @@
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 // Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 600;
+const GLuint WIDTH = 1200, HEIGHT = 800;
 
 // The MAIN function, from here we start the application and run the game loop
 int main()
@@ -77,18 +77,12 @@ int main()
 	Shader shader;
 	shader.SetFilePath("res/shaders/Basic.shader");
 
+	Renderer renderer;	
+	
 	const unsigned int size = 200;
-	
-	SortProgram sortProgram;
-	sortProgram.GenerateMassive(size);
+	SortProgram& sortProgram = SortProgram::Get();
+	sortProgram.GenerateMassive(size, 500);
 	sortProgram.SetMethod(SortType::MERGE);
-
-	Renderer renderer;
-	bool show_demo_window = true;
-	bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-	
-	sortProgram.Begin();
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
@@ -103,22 +97,35 @@ int main()
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 		{
-			static float f = 0.0f;
-			static int counter = 0;
+			static int sortChooser = INT_MAX;
+			ImGui::Begin("Control panel");                          
 
-			ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-			ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-			ImGui::Checkbox("Another Window", &show_another_window);
-
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-			ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-			if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-				counter++;
+			if (ImGui::Button("Shuffle Massive"))
+			{
+				sortProgram.ShuffleMassive();
+			}
 			ImGui::SameLine();
-			ImGui::Text("counter = %d", counter);
+			if (ImGui::Button("Sort"))
+			{
+				LOG_INFO("Sort started!");
+				sortProgram.Begin();
+			}
+
+			if (ImGui::TreeNode("Select sort algorithm:"))
+			{
+				if (ImGui::RadioButton("Bubble Sort", &sortChooser, 0))
+				{
+					sortProgram.SetMethod(SortType::BUBBLE);
+					LOG_INFO("Bubble sort is choosed!");
+				}
+				ImGui::SameLine();
+				if (ImGui::RadioButton("Merge Sort", &sortChooser, 1))
+				{
+					sortProgram.SetMethod(SortType::MERGE);
+					LOG_INFO("Merge sort is choosed!");
+				}
+				ImGui::TreePop();
+			}
 
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			ImGui::End();

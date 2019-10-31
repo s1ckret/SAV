@@ -1,8 +1,14 @@
 #include "MergeSort.h"
 
-void MergeSort::Begin(int * mass, unsigned int nElements)
+void MergeSort::Begin(int * mass, unsigned int nElements, Vec3* color_markers)
 {
+	color_markers_ = color_markers;
 	MergeSortBegin(mass, 0, nElements - 1);
+	for (unsigned int i = 0; i < nElements; i++)
+	{
+		color_markers_[i].Set(0.f, 1.f, 0.f);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+	}
 	LOG_INFO("I am sorted !");
 }
 
@@ -41,19 +47,25 @@ void MergeSort::Merge(int * mass, unsigned int left, unsigned int mid, unsigned 
 	unsigned int i = 0, j = 0, k = left;
 	while (i < sizeLeft && j < sizeRight)
 	{
+		color_markers_[left + i].Set(1.f, 1.f, 1.f);
+		color_markers_[mid + j].Set(1.f, 1.f, 1.f);
+
 		if (tempLeft[i] < tempRight[j])
 		{
 			mass[k] = tempLeft[i];
 			i++;
+			color_markers_[left + i].Set(1.f, 0.f, 0.f);
 		}
 		else
 		{
 			mass[k] = tempRight[j];
 			j++;
+			color_markers_[mid + j].Set(1.f, 0.f, 0.f);
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		k++;
 	}
+
 	// Copy the remaining elements
 	while (i < sizeLeft)
 	{
@@ -70,6 +82,8 @@ void MergeSort::Merge(int * mass, unsigned int left, unsigned int mid, unsigned 
 		k++;
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 	}
+	color_markers_[mid + j].Set(1.f, 1.f, 1.f);
+	color_markers_[left + i].Set(1.f, 1.f, 1.f);
 
 	delete[] tempLeft;
 	delete[] tempRight;
