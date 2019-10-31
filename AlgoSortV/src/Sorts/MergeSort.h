@@ -5,6 +5,7 @@
 class MergeSort : public ISort
 {
 public:
+	MergeSort();
 	void Begin(int * mass, unsigned int nElements, Vec3* color_markers) override;
 private:
 	void MergeSortBegin(int * mass, unsigned int left, unsigned int right);

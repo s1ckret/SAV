@@ -1,5 +1,10 @@
 #include "MergeSort.h"
 
+MergeSort::MergeSort() : ISort()
+{
+	name_ = "MergeSort";
+}
+
 void MergeSort::Begin(int * mass, unsigned int nElements, Vec3* color_markers)
 {
 	color_markers_ = color_markers;
@@ -7,7 +12,7 @@ void MergeSort::Begin(int * mass, unsigned int nElements, Vec3* color_markers)
 	for (unsigned int i = 0; i < nElements; i++)
 	{
 		color_markers_[i].Set(0.f, 1.f, 0.f);
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	LOG_INFO("I am sorted !");
 }

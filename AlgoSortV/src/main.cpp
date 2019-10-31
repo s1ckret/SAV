@@ -101,19 +101,17 @@ int main()
 				LOG_INFO("Sort started!");
 				sortProgram.Begin();
 			}
+			
 
 			if (ImGui::TreeNode("Select sort algorithm:"))
 			{
-				if (ImGui::RadioButton("Bubble Sort", &sortChooser, 0))
+				for (unsigned int i = 0; i < (unsigned int)SortType::SORTS_COUNT; i++)
 				{
-					sortProgram.SetMethod(SortType::BUBBLE);
-					LOG_INFO("Bubble sort is choosed!");
-				}
-				ImGui::SameLine();
-				if (ImGui::RadioButton("Merge Sort", &sortChooser, 1))
-				{
-					sortProgram.SetMethod(SortType::MERGE);
-					LOG_INFO("Merge sort is choosed!");
+					if (ImGui::RadioButton(sortProgram.GetSortName((SortType)i).c_str(), &sortChooser, i))
+					{
+						sortProgram.SetMethod((SortType)i);
+						LOG_INFO("{0} is choosed!", sortProgram.GetSortName((SortType)i).c_str());
+					}
 				}
 				ImGui::TreePop();
 			}

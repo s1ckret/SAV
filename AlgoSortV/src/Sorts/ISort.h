@@ -16,4 +16,7 @@ class ISort
 {
 public:
 	virtual void Begin(int * mass, unsigned int nElements, Vec3* color_markers) = 0;
+	std::string GetName() const	{ return name_;	}
+protected:
+	std::string name_;
 };

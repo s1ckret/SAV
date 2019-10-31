@@ -1,5 +1,10 @@
 #include "BubbleSort.h"
 
+BubbleSort::BubbleSort() : ISort()
+{
+	name_ = "BubbleSort";
+}
+
 void BubbleSort::Begin(int * mass, unsigned int nElements, Vec3 * color_markers)
 {
 	for (unsigned int i = 0; i < nElements; i++)

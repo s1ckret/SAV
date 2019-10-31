@@ -69,6 +69,11 @@ void SortProgram::Render(const Renderer & renderer)
 	renderer_->Draw(renderer);
 }
 
+std::string SortProgram::GetSortName(SortType sort) const
+{
+	return SORTS[(unsigned int) sort]->GetName();
+}
+
 void SortProgram::SetMethod(SortType sort)
 {
 	sort_ = SORTS[(unsigned int)sort];

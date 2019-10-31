@@ -27,6 +27,8 @@ public:
 	void Begin();
 	void ShuffleMassive();
 	void Render(const Renderer& renderer);
+	
+	std::string GetSortName(SortType sort) const;
 private:
 	SortProgram();
 	~SortProgram();
