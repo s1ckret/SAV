@@ -5,6 +5,6 @@
 class BubbleSort : public ISort
 {
 public:
-	void operator()(int * mass, unsigned int nElements) override;
+	void Begin(int * mass, unsigned int nElements) override;
 
 };

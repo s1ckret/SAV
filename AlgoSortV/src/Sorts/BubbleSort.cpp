@@ -1,7 +1,6 @@
 #include "BubbleSort.h"
-#include "Log.h"
 
-void BubbleSort::operator()(int * mass, unsigned int nElements)
+void BubbleSort::Begin(int * mass, unsigned int nElements)
 {
 	for (unsigned int i = 0; i < nElements; i++)
 	{
