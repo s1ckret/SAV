@@ -58,8 +58,7 @@ int main()
 	// Define the viewport dimensions
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);  
-	glViewport(0, 0, width, height);
-
+	GLCall(glViewport(0, -height, width, 2 * height));
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
