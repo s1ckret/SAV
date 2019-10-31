@@ -37,7 +37,7 @@ void SortProgram::Begin()
 
 void SortProgram::Render(const Renderer & renderer)
 {
-	(*renderer_)(renderer);
+	renderer_->Draw(renderer);
 }
 
 void SortProgram::SetMethod(SortType sort)
@@ -47,7 +47,8 @@ void SortProgram::SetMethod(SortType sort)
 	case SortType::BUBBLE: sort_ = new BubbleSort;
 		renderer_ = new BubbleSortRenderer(mass_, nElements_);
 		break;
-	case SortType::MERGE:
+	case SortType::MERGE: sort_ = new MergeSort;
+		renderer_ = new BubbleSortRenderer(mass_, nElements_);
 		break;
 	case SortType::QUICK:
 		break;

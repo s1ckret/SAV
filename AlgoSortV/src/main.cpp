@@ -77,11 +77,11 @@ int main()
 	Shader shader;
 	shader.SetFilePath("res/shaders/Basic.shader");
 
-	const unsigned int size = 100;
+	const unsigned int size = 200;
 	
 	SortProgram sortProgram;
 	sortProgram.GenerateMassive(size);
-	sortProgram.SetMethod(SortType::BUBBLE);
+	sortProgram.SetMethod(SortType::MERGE);
 
 	Renderer renderer;
 	bool show_demo_window = true;

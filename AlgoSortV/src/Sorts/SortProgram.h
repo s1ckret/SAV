@@ -5,6 +5,7 @@
 
 #include "ISort.h"
 #include "BubbleSort.h"
+#include "MergeSort.h"
 
 #include "Graphics\Renderer.h"
 #include "Graphics\SortRenders\ISortRenderer.h"

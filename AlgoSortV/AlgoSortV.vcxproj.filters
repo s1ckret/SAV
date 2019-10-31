@@ -69,6 +69,9 @@
     <ClCompile Include="src\Graphics\SortRenders\BubbleSortRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sorts\MergeSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics\IndexBuffer.h">
@@ -360,6 +363,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Graphics\SortRenders\BubbleSortRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sorts\MergeSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
