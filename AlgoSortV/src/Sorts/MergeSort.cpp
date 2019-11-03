@@ -1,19 +1,15 @@
 #include "MergeSort.h"
+#include "SortProgram.h"
 
-MergeSort::MergeSort() : ISort()
+MergeSort::MergeSort(ArrayInfo& arr_info) : ISort(arr_info)
 {
 	name_ = "MergeSort";
 }
 
-void MergeSort::Begin(int * mass, unsigned int nElements, Vec3* color_markers)
+void MergeSort::Begin()
 {
-	color_markers_ = color_markers;
-	MergeSortBegin(mass, 0, nElements - 1);
-	for (unsigned int i = 0; i < nElements; i++)
-	{
-		color_markers_[i].Set(0.f, 1.f, 0.f);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
-	}
+	MergeSortBegin(arr_info_.arr, 0, arr_info_.nElements - 1);
+	DisplaySorted();
 	LOG_INFO("I am sorted !");
 }
 
@@ -22,6 +18,7 @@ void MergeSort::MergeSortBegin(int * mass, unsigned int left, unsigned int right
 	if (left < right)
 	{
 		unsigned int mid = (left + right) / 2;
+
 		MergeSortBegin(mass, left, mid);
 		MergeSortBegin(mass, mid + 1, right);
 
@@ -52,47 +49,47 @@ void MergeSort::Merge(int * mass, unsigned int left, unsigned int mid, unsigned 
 	unsigned int i = 0, j = 0, k = left;
 	while (i < sizeLeft && j < sizeRight)
 	{
-		color_markers_[left + i].Set(1.f, 1.f, 1.f);
-		color_markers_[mid + j].Set(1.f, 1.f, 1.f);
+		MarkColor(left + i, ColorName::White);
+		MarkColor(mid + j, ColorName::White);
 
 		if (tempLeft[i] < tempRight[j])
 		{
 			mass[k] = tempLeft[i];
 			i++;
-			color_markers_[left + i].Set(1.f, 0.f, 0.f);
+			MarkColor(left + i, ColorName::Red);
 		}
 		else
 		{
 			mass[k] = tempRight[j];
 			j++;
-			color_markers_[mid + j].Set(1.f, 0.f, 0.f);
+			MarkColor(mid + j, ColorName::Red);
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
+		SleepFor(2);
 		k++;
 	}
 
 	// Copy the remaining elements
 	while (i < sizeLeft)
 	{
-		color_markers_[left + i].Set(1.f, 1.f, 1.f);
+		MarkColor(left + i, ColorName::White);
 		mass[k] = tempLeft[i];
 		i++;
 		k++;
-		color_markers_[left + i].Set(1.f, 0.f, 0.f);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
+		MarkColor(left + i, ColorName::Red);
+		SleepFor(2);
 	}
 	// Copy the remaining elements 
 	while (j < sizeRight)
 	{
-		color_markers_[mid + j].Set(1.f, 1.f, 1.f);
+		MarkColor(mid + j, ColorName::White);
 		mass[k] = tempRight[j];
 		j++;
 		k++;
-		color_markers_[mid + j].Set(1.f, 0.f, 0.f);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
+		MarkColor(mid + j, ColorName::Red);
+		SleepFor(2);
 	}
-	color_markers_[mid + j].Set(1.f, 1.f, 1.f);
-	color_markers_[left + i].Set(1.f, 1.f, 1.f);
+	MarkColor(mid + j, ColorName::White);
+	MarkColor(left + i, ColorName::White);
 
 	delete[] tempLeft;
 	delete[] tempRight;

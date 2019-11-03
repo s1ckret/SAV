@@ -137,6 +137,8 @@
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Sorts\BubbleSort.cpp" />
+    <ClCompile Include="src\Sorts\CountingSort.cpp" />
+    <ClCompile Include="src\Sorts\ISort.cpp" />
     <ClCompile Include="src\Sorts\MergeSort.cpp" />
     <ClCompile Include="src\Sorts\SortProgram.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
@@ -157,6 +159,8 @@
     <ClInclude Include="src\Graphics\VertexBufferLayout.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\Sorts\BubbleSort.h" />
+    <ClInclude Include="src\Sorts\CountingSort.h" />
+    <ClInclude Include="src\Sorts\DataTypes.h" />
     <ClInclude Include="src\Sorts\MergeSort.h" />
     <ClInclude Include="src\Sorts\SortProgram.h" />
     <ClInclude Include="src\Sorts\ISort.h" />

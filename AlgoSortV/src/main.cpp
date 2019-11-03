@@ -72,7 +72,6 @@ int main()
 	const unsigned int size = 200;
 	SortProgram& sortProgram = SortProgram::Get();
 	sortProgram.GenerateMassive(size, 500);
-	sortProgram.SetMethod(SortType::MERGE);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))

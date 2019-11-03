@@ -6,19 +6,17 @@
 #include "Graphics\Renderer.h"
 
 #include "Sorts\ISort.h"
+#include "Sorts\DataTypes.h"
 
 class SortRenderer
 {
 public:
-	SortRenderer(int * mass, Vec3 * color_markers, unsigned int nElements, int max_value);
+	SortRenderer(ArrayInfo& arr_info);
 
 	void Draw(const Renderer & renderer);
 
 protected:
-	int * mass_;
-	Vec3 * color_markers_;
-	int max_value_;
-	unsigned int nElements_;
+	ArrayInfo& arr_info_;
 
 	VertexBufferLayout vbl_;
 	VertexBuffer vb_;

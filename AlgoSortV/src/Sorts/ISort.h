@@ -1,22 +1,20 @@
 #pragma once
 #include "Log.h"
-
-struct Vec3
-{
-	float x, y, z;
-	void Set(float X, float Y, float Z)
-	{
-		x = X;
-		y = Y;
-		z = Z;
-	}
-};
+#include "DataTypes.h"
 
 class ISort
 {
 public:
-	virtual void Begin(int * mass, unsigned int nElements, Vec3* color_markers) = 0;
+	ISort(ArrayInfo& arr_info);
+	virtual ~ISort() = default;
+
+	virtual void Begin() = 0;
 	std::string GetName() const	{ return name_;	}
 protected:
+	void MarkColor(unsigned int index, ColorName color);
+	void DisplaySorted();
+	void SleepFor(unsigned int miliseconds);
+protected:
 	std::string name_;
+	ArrayInfo& arr_info_;
 };

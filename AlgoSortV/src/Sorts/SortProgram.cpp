@@ -1,13 +1,9 @@
 #include "SortProgram.h"
 
-ISort* SortProgram::SORTS[(unsigned int)SortType::SORTS_COUNT] = 
-{ 
-	new BubbleSort,
-	new MergeSort
-};
 
 SortProgram::SortProgram()
 {
+	InitSorts();
 }
 
 SortProgram::~SortProgram()
@@ -26,41 +22,45 @@ SortProgram & SortProgram::Get()
 
 void SortProgram::GenerateMassive(const unsigned int nElements, const int max_value)
 {
-	max_value_ = max_value;
-	if (nElements_ != nElements)
+	arr_info_.max_value = max_value;
+	if (arr_info_.nElements != nElements)
 	{
-		nElements_ = nElements;
-		if (mass_)
+		arr_info_.nElements = nElements;
+		if (arr_info_.arr)
 		{
-			free(mass_);
-			free(color_markers_);
+			free(arr_info_.arr);
+			free(arr_info_.markers);
 		}
-		mass_ = (int*)malloc(sizeof(int) * nElements_);
-		color_markers_ = (Vec3*)malloc(sizeof(Vec3) * nElements_);
+		arr_info_.arr = (int*)malloc(sizeof(int) * arr_info_.nElements);
+		arr_info_.markers = (Color*)malloc(sizeof(Vec3) * arr_info_.nElements);
 	}
-	for (unsigned int i = 0; i < nElements_; i++)
+	for (unsigned int i = 0; i < arr_info_.nElements; i++)
 	{
-		mass_[i] = rand() % max_value_;
+		arr_info_.arr[i] = rand() % arr_info_.max_value;
 	}
 	ShuffleMassive();
+	if (!renderer_)
+	{
+		renderer_ = new SortRenderer(arr_info_);
+	}
 }
 
 void SortProgram::Begin()
 {
 	Join();
-	thread_sort = std::move(std::thread(&ISort::Begin, sort_, std::ref(mass_), nElements_, std::ref(color_markers_)));
+	thread_sort = std::move(std::thread(&ISort::Begin, std::ref(sort_)));
 }
 
 void SortProgram::ShuffleMassive()
 {
-	for (unsigned int i = 0; i < nElements_; i++)
+	for (unsigned int i = 0; i < arr_info_.nElements; i++)
 	{
-		unsigned int randomIndex = rand() % nElements_;
-		int temp = mass_[i];
-		mass_[i] = mass_[randomIndex];
-		mass_[randomIndex] = temp;
+		unsigned int randomIndex = rand() % arr_info_.nElements;
+		int temp = arr_info_.arr[i];
+		arr_info_.arr[i] = arr_info_.arr[randomIndex];
+		arr_info_.arr[randomIndex] = temp;
 
-		color_markers_[i].Set(1.f, 1.f, 1.f);
+		arr_info_.markers[i].Set(ColorName::White);
 	}
 }
 
@@ -77,10 +77,6 @@ std::string SortProgram::GetSortName(SortType sort) const
 void SortProgram::SetMethod(SortType sort)
 {
 	sort_ = SORTS[(unsigned int)sort];
-	if (!renderer_)
-	{
-		renderer_ = new SortRenderer(mass_, color_markers_, nElements_, max_value_);
-	}
 }
 
 void SortProgram::Join()
@@ -89,4 +85,12 @@ void SortProgram::Join()
 	{
 		thread_sort.join();
 	}
+}
+
+void SortProgram::InitSorts()
+{
+	SORTS = new ISort*[(unsigned int)SortType::SORTS_COUNT];
+
+	SORTS[(unsigned int)SortType::BUBBLE] = new BubbleSort(arr_info_);
+	SORTS[(unsigned int)SortType::MERGE] = new MergeSort(arr_info_);
 }

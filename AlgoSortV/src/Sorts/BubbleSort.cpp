@@ -1,30 +1,35 @@
 #include "BubbleSort.h"
 
-BubbleSort::BubbleSort() : ISort()
+BubbleSort::BubbleSort(ArrayInfo & arr_info) : ISort(arr_info)
 {
 	name_ = "BubbleSort";
 }
 
-void BubbleSort::Begin(int * mass, unsigned int nElements, Vec3 * color_markers)
+void BubbleSort::Begin()
+{
+	BubbleSortBegin(arr_info_.arr, arr_info_.nElements);
+	LOG_INFO("I am sorted !");
+}
+
+void BubbleSort::BubbleSortBegin(int * arr, unsigned int nElements)
 {
 	for (unsigned int i = 0; i < nElements; i++)
 	{
 		for (unsigned int j = 0; j < nElements - i - 1; j++)
 		{
-			color_markers[j].Set(1.f, 0.f, 0.f);
-			color_markers[j + 1].Set(1.f, 0.f, 0.f);
-			if (mass[j] > mass[j + 1])
+			MarkColor(j, ColorName::Red);
+			MarkColor(j + 1, ColorName::Red);
+			if (arr[j] > arr[j + 1])
 			{
-				int temp = mass[j];
-				mass[j] = mass[j + 1];
-				mass[j + 1] = temp;
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-			color_markers[j].Set(1.f, 1.f, 1.f);
+			SleepFor(1);
+			MarkColor(j, ColorName::White);
 		}
-		color_markers[nElements - 1 - i].Set(0.f, 1.f, 0.f);
+		MarkColor(nElements - 1 - i, ColorName::Green);
 	}
-	LOG_INFO("I am sorted !");
 }
 
 

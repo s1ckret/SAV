@@ -10,13 +10,6 @@
 #include "Graphics\Renderer.h"
 #include "Graphics\SortRenders\SortRenderer.h"
 
-enum class SortType
-{
-	BUBBLE,
-	MERGE,
-	SORTS_COUNT = 2
-};
-
 class SortProgram
 {
 public:
@@ -33,15 +26,15 @@ private:
 	SortProgram();
 	~SortProgram();
 	void Join();
+	void InitSorts();
 private:
-	int* mass_;
-	int max_value_;
-	unsigned int nElements_;
-	Vec3 * color_markers_;
 	ISort* sort_;
-	SortRenderer* renderer_;
+	ISort** SORTS;
 
 	std::thread thread_sort;
 
-	static ISort* SORTS[(unsigned int)SortType::SORTS_COUNT];
+	ArrayInfo arr_info_;
+
+	SortRenderer* renderer_;
+
 };
