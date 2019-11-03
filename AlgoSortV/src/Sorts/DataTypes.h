@@ -2,9 +2,10 @@
 
 enum class SortType
 {
-	BUBBLE,
+	BUBBLE = 0,
 	MERGE,
-	SORTS_COUNT = 2
+	COUNTING,
+	SORTS_COUNT
 };
 
 struct Vec3

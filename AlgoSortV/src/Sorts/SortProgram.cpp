@@ -32,7 +32,7 @@ void SortProgram::GenerateMassive(const unsigned int nElements, const int max_va
 			free(arr_info_.markers);
 		}
 		arr_info_.arr = (int*)malloc(sizeof(int) * arr_info_.nElements);
-		arr_info_.markers = (Color*)malloc(sizeof(Vec3) * arr_info_.nElements);
+		arr_info_.markers = (Color*)malloc(sizeof(Color) * arr_info_.nElements);
 	}
 	for (unsigned int i = 0; i < arr_info_.nElements; i++)
 	{
@@ -93,4 +93,5 @@ void SortProgram::InitSorts()
 
 	SORTS[(unsigned int)SortType::BUBBLE] = new BubbleSort(arr_info_);
 	SORTS[(unsigned int)SortType::MERGE] = new MergeSort(arr_info_);
+	SORTS[(unsigned int)SortType::COUNTING] = new CountingSort(arr_info_);
 }
