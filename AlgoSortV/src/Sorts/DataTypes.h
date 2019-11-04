@@ -6,6 +6,7 @@ enum class SortType
 	MERGE,
 	COUNTING,
 	SELECTION,
+	SHELL,
 	SORTS_COUNT
 };
 

@@ -8,6 +8,7 @@
 #include "MergeSort.h"
 #include "CountingSort.h"
 #include "SelectionSort.h"
+#include "ShellSort.h"
 
 #include "Graphics\Renderer.h"
 #include "Graphics\SortRenders\SortRenderer.h"

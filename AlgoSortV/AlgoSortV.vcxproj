@@ -141,6 +141,7 @@
     <ClCompile Include="src\Sorts\ISort.cpp" />
     <ClCompile Include="src\Sorts\MergeSort.cpp" />
     <ClCompile Include="src\Sorts\SelectionSort.cpp" />
+    <ClCompile Include="src\Sorts\ShellSort.cpp" />
     <ClCompile Include="src\Sorts\SortProgram.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="src\Sorts\DataTypes.h" />
     <ClInclude Include="src\Sorts\MergeSort.h" />
     <ClInclude Include="src\Sorts\SelectionSort.h" />
+    <ClInclude Include="src\Sorts\ShellSort.h" />
     <ClInclude Include="src\Sorts\SortProgram.h" />
     <ClInclude Include="src\Sorts\ISort.h" />
     <ClInclude Include="src\vendor\imgui\imconfig.h" />
