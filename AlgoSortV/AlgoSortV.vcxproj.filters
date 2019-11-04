@@ -75,6 +75,9 @@
     <ClCompile Include="src\Sorts\ISort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sorts\SelectionSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics\IndexBuffer.h">
@@ -372,6 +375,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Sorts\DataTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sorts\SelectionSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,7 @@ enum class SortType
 	BUBBLE = 0,
 	MERGE,
 	COUNTING,
+	SELECTION,
 	SORTS_COUNT
 };
 

@@ -94,4 +94,5 @@ void SortProgram::InitSorts()
 	SORTS[(unsigned int)SortType::BUBBLE] = new BubbleSort(arr_info_);
 	SORTS[(unsigned int)SortType::MERGE] = new MergeSort(arr_info_);
 	SORTS[(unsigned int)SortType::COUNTING] = new CountingSort(arr_info_);
+	SORTS[(unsigned int)SortType::SELECTION] = new SelectionSort(arr_info_);
 }

@@ -7,6 +7,7 @@
 #include "BubbleSort.h"
 #include "MergeSort.h"
 #include "CountingSort.h"
+#include "SelectionSort.h"
 
 #include "Graphics\Renderer.h"
 #include "Graphics\SortRenders\SortRenderer.h"
