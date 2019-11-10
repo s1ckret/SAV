@@ -7,6 +7,7 @@ enum class SortType
 	COUNTING,
 	SELECTION,
 	SHELL,
+	QUICKL,
 	SORTS_COUNT
 };
 
