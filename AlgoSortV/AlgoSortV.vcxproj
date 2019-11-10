@@ -141,6 +141,7 @@
     <ClCompile Include="src\Sorts\ISort.cpp" />
     <ClCompile Include="src\Sorts\MergeSort.cpp" />
     <ClCompile Include="src\Sorts\QuickLSort.cpp" />
+    <ClCompile Include="src\Sorts\RadixLsdSort.cpp" />
     <ClCompile Include="src\Sorts\SelectionSort.cpp" />
     <ClCompile Include="src\Sorts\ShellSort.cpp" />
     <ClCompile Include="src\Sorts\SortProgram.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\Sorts\DataTypes.h" />
     <ClInclude Include="src\Sorts\MergeSort.h" />
     <ClInclude Include="src\Sorts\QuickLSort.h" />
+    <ClInclude Include="src\Sorts\RadixLsdSort.h" />
     <ClInclude Include="src\Sorts\SelectionSort.h" />
     <ClInclude Include="src\Sorts\ShellSort.h" />
     <ClInclude Include="src\Sorts\SortProgram.h" />

@@ -10,6 +10,7 @@
 #include "SelectionSort.h"
 #include "ShellSort.h"
 #include "QuickLSort.h"
+#include "RadixLsdSort.h"
 
 #include "Graphics\Renderer.h"
 #include "Graphics\SortRenders\SortRenderer.h"

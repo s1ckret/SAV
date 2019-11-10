@@ -8,6 +8,7 @@ enum class SortType
 	SELECTION,
 	SHELL,
 	QUICKL,
+	RADIXLSD,
 	SORTS_COUNT
 };
 
