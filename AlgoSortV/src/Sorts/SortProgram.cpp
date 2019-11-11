@@ -98,4 +98,5 @@ void SortProgram::InitSorts()
 	SORTS[(unsigned int)SortType::SHELL] = new ShellSort(arr_info_);
 	SORTS[(unsigned int)SortType::QUICKL] = new QuickLSort(arr_info_);
 	SORTS[(unsigned int)SortType::RADIXLSD] = new RadixLsdSort(arr_info_);
+	SORTS[(unsigned int)SortType::HEAPSORT] = new HeapSort(arr_info_);
 }

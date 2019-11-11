@@ -11,6 +11,7 @@
 #include "ShellSort.h"
 #include "QuickLSort.h"
 #include "RadixLsdSort.h"
+#include "HeapSort.h"
 
 #include "Graphics\Renderer.h"
 #include "Graphics\SortRenders\SortRenderer.h"

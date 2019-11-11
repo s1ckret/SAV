@@ -138,6 +138,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Sorts\BubbleSort.cpp" />
     <ClCompile Include="src\Sorts\CountingSort.cpp" />
+    <ClCompile Include="src\Sorts\HeapSort.cpp" />
     <ClCompile Include="src\Sorts\ISort.cpp" />
     <ClCompile Include="src\Sorts\MergeSort.cpp" />
     <ClCompile Include="src\Sorts\QuickLSort.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\Sorts\BubbleSort.h" />
     <ClInclude Include="src\Sorts\CountingSort.h" />
     <ClInclude Include="src\Sorts\DataTypes.h" />
+    <ClInclude Include="src\Sorts\HeapSort.h" />
     <ClInclude Include="src\Sorts\MergeSort.h" />
     <ClInclude Include="src\Sorts\QuickLSort.h" />
     <ClInclude Include="src\Sorts\RadixLsdSort.h" />

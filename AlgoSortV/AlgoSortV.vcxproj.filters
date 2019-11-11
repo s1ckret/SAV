@@ -87,6 +87,9 @@
     <ClCompile Include="src\Sorts\RadixLsdSort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sorts\HeapSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics\IndexBuffer.h">
@@ -396,6 +399,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Sorts\RadixLsdSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sorts\HeapSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
