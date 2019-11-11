@@ -21,9 +21,7 @@ void BubbleSort::BubbleSortBegin(int * arr, unsigned int nElements)
 			MarkColor(j + 1, ColorName::Red);
 			if (arr[j] > arr[j + 1])
 			{
-				int temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
+				Swap(arr[j], arr[j + 1]);
 			}
 			SleepFor(1);
 			MarkColor(j, ColorName::White);

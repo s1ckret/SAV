@@ -4,6 +4,13 @@ ISort::ISort(ArrayInfo & arr_info) :
 	arr_info_(arr_info)
 {}
 
+void ISort::Swap(int & lhs, int & rhs)
+{
+	int temp = lhs;
+	lhs = rhs;
+	rhs = temp;
+}
+
 void ISort::MarkColor(unsigned int index, ColorName color)
 {
 	arr_info_.markers[index].Set(color);

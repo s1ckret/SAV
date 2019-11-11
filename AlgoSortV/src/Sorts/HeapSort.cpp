@@ -21,10 +21,7 @@ void HeapSort::HeapSortBegin(int * arr, int nElements)
 
 	for (int i = nElements - 1; i >= 0; i--)
 	{
-		int temp = arr[i];
-		arr[i] = arr[0];
-		arr[0] = temp;
-
+		Swap(arr[i], arr[0]);
 		MarkColor(i, ColorName::Green);
 
 		Heapify(arr, i, 0);
@@ -59,10 +56,6 @@ void HeapSort::Heapify(int * arr, unsigned int nElements, unsigned int index)
 	MarkColor(left_index, ColorName::White);
 	MarkColor(right_index, ColorName::White);
 
-
-	int temp = arr[max_value_index];
-	arr[max_value_index] = arr[index];
-	arr[index] = temp;
-
+	Swap(arr[index], arr[max_value_index]);
 	Heapify(arr, nElements, max_value_index);
 }

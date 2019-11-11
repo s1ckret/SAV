@@ -11,6 +11,7 @@ public:
 	virtual void Begin() = 0;
 	std::string GetName() const	{ return name_;	}
 protected:
+	void Swap(int& lhs, int& rhs);
 	void MarkColor(unsigned int index, ColorName color);
 	void DisplaySorted();
 	void SleepFor(unsigned int miliseconds);

@@ -27,9 +27,7 @@ void SelectionSort::SelectionSortBegin(int * arr, unsigned int nElements)
 			SleepFor(1);
 			MarkColor(j, ColorName::White);
 		}
-		int temp = arr[i];
-		arr[i] = arr[min_index];
-		arr[min_index] = temp;
+		Swap(arr[i], arr[min_index]);
 		MarkColor(i, ColorName::Green);
 	}
 }

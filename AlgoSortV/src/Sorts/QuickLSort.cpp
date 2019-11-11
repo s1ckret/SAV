@@ -37,9 +37,7 @@ unsigned int QuickLSort::Partition(int * arr, int left, int right)
 		{
 			i++;
 			MarkColor(i, ColorName::Magenta);
-			int temp = arr[j];
-			arr[j] = arr[i];
-			arr[i] = temp;
+			Swap(arr[j], arr[i]);
 		}
 		SleepFor(5);
 		MarkColor(i, ColorName::White);
