@@ -12,14 +12,14 @@
 #include "vendor/imgui/imgui_impl_glfw.h"
 #include "vendor/imgui/imgui_impl_opengl3.h"
 
-#include "Graphics\IndexBuffer.h"
-#include "Graphics\Renderer.h"
-#include "Graphics\Shader.h"
-#include "Graphics\VertexArray.h"
-#include "Graphics\VertexBuffer.h"
-#include "Graphics\VertexBufferLayout.h"
+#include "Graphics/IndexBuffer.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/Shader.h"
+#include "Graphics/VertexArray.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/VertexBufferLayout.h"
 
-#include "Sorts\SortProgram.h"
+#include "Sorts/SortProgram.h"
 
 // Window dimensions
 const GLuint WIDTH = 1200, HEIGHT = 800;

@@ -5,9 +5,9 @@
 	x;\
 	ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 
-#include "Graphics\VertexArray.h"
-#include "Graphics\IndexBuffer.h"
-#include "Graphics\Shader.h"
+#include "Graphics/VertexArray.h"
+#include "Graphics/IndexBuffer.h"
+#include "Graphics/Shader.h"
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"

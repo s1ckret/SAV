@@ -1,12 +1,12 @@
 #pragma once
-#include "Graphics\VertexBufferLayout.h"
-#include "Graphics\VertexBuffer.h"
-#include "Graphics\VertexArray.h"
-#include "Graphics\Shader.h"
-#include "Graphics\Renderer.h"
+#include "Graphics/VertexBufferLayout.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/VertexArray.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Renderer.h"
 
-#include "Sorts\ISort.h"
-#include "Sorts\DataTypes.h"
+#include "Sorts/ISort.h"
+#include "Sorts/DataTypes.h"
 
 class SortRenderer
 {

@@ -13,8 +13,8 @@
 #include "RadixLsdSort.h"
 #include "HeapSort.h"
 
-#include "Graphics\Renderer.h"
-#include "Graphics\SortRenders\SortRenderer.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/SortRenders/SortRenderer.h"
 
 class SortProgram
 {
