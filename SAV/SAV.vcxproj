@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{95247893-26D5-4DC5-B722-A322B341E766}</ProjectGuid>
-    <RootNamespace>AlgoSortV</RootNamespace>
+    <RootNamespace>SAV</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
