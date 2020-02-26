@@ -1,4 +1,5 @@
 #include "ISort.h"
+#include <thread>
 
 ISort::ISort(ArrayInfo & arr_info) :
 	arr_info_(arr_info)
