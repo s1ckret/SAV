@@ -18,7 +18,7 @@ public:
 	Shader(const std::string& filepath);
 	Shader(const Shader& shader);
 	~Shader();
-	Shader& operator=(const Shader& rhs);
+	Shader operator=(const Shader& rhs);
 
 	void SetFilePath(const std::string& filepath);
 	void Bind() const;

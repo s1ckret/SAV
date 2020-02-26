@@ -30,9 +30,9 @@ Shader::~Shader()
 	GLCall(glDeleteProgram(m_RendererID));
 }
 
-Shader & Shader::operator=(const Shader & rhs)
+Shader Shader::operator=(const Shader & rhs)
 {
-	return Shader(rhs);
+	return std::move(Shader(rhs));
 }
 
 void Shader::SetFilePath(const std::string & filepath)
