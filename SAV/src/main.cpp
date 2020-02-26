@@ -86,7 +86,7 @@ int main()
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 		{
-			static int sortChooser = INT_MAX;
+			static int sortChooser = -1;
 			ImGui::Begin("Control panel");                          
 
 			if (ImGui::Button("Shuffle Massive"))
