@@ -1,6 +1,15 @@
 #pragma once
 
-#define ASSERT(x) if(!(x)) __debugbreak();
+#if _WIN32 || _WIN64
+	#define DEBUG_BRK __debugbreak()
+#elif __GNUC__
+	#include <signal.h>
+	#define DEBUG_BRK raise(SIGTRAP)
+#else
+	#define DEBUG_BRK 
+#endif
+
+#define ASSERT(x) if(!(x)) DEBUG_BRK;
 #define GLCall(x) GLClearErrors();\
 	x;\
 	ASSERT(GLLogCall(#x, __FILE__, __LINE__))
