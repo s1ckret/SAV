@@ -24,6 +24,9 @@ struct VertexBufferElement
 	}
 };
 
+template<typename T>
+struct VBLIdentety { typedef T type; };
+
 class VertexBufferLayout
 {
 public:
@@ -47,7 +50,7 @@ public:
 	template<typename T>
 	void Push(unsigned int count)
 	{
-		assert(false);
+		Push(count, VBLIdentety<T>());
 	}
 
 	inline unsigned int GetStride() const { return m_Stride; }
@@ -56,4 +59,23 @@ public:
 private:
 	unsigned int m_Stride;
 	std::vector<VertexBufferElement> m_Elements;
+
+private:
+	void Push(unsigned int count, VBLIdentety<float>)
+	{
+		m_Elements.push_back({ GL_FLOAT, count, GL_FALSE });
+		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_FLOAT);
+	}
+
+	void Push(unsigned int count, VBLIdentety<unsigned int>)
+	{
+		m_Elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
+		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_UNSIGNED_INT);
+	}
+
+	void Push(unsigned int count, VBLIdentety<unsigned char>)
+	{
+		m_Elements.push_back({ GL_UNSIGNED_BYTE, count, GL_TRUE });
+		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_UNSIGNED_BYTE);
+	}
 };
