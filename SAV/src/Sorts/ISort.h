@@ -1,6 +1,6 @@
 #pragma once
 #include "Log.h"
-#include "DataTypes.h"
+#include "Utility/DataTypes.h"
 
 class ISort
 {
