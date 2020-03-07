@@ -19,11 +19,19 @@
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/VertexBufferLayout.h"
 
-#include "Sorts/SortProgram.h"
+#include "DataController/IDataController.h"
+#include "DataController/BasicDataController.h"
+
+#include "Graphics/DataRenderer/IDataRenderer.h"
+#include "Graphics/DataRenderer/BasicDataRenderer.h"
+
+#include "SortsController/SortsController.h"
+
+#include "Sorts/BubbleSort.h"
 
 // Window dimensions
 const GLuint WIDTH = 1200, HEIGHT = 800;
-
+GLFWwindow* window;
 // The MAIN function, from here we start the application and run the game loop
 int main()
 {
@@ -38,7 +46,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);    
+	window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);    
 	if (window == nullptr)
 	{
 		LOG_CRITICAL("Failed to create GLFW window");
@@ -69,17 +77,33 @@ int main()
 
 	Renderer renderer;	
 	
-	const unsigned int size = 200;
-	SortProgram& sortProgram = SortProgram::Get();
-	sortProgram.GenerateMassive(size, 500);
+	const unsigned int size = 100;
+	// SortProgram& sortProgram = SortProgram::Get();
+	// sortProgram.GenerateMassive(size, 500);
 
+	BasicDataController dataCtrl;
+	dataCtrl.Generate(size, 500);
+	dataCtrl.Shuffle();
+
+	BasicDataRenderer dataRndr;
+	dataRndr.SetData(&dataCtrl.GetData());
+	dataRndr.SetDelay(5);
+
+	SortsController& SortsController = SortsController::Get();
+	SortsController.SetDataController(&dataCtrl);
+	SortsController.SetDataRenderer(&dataRndr);
+
+	SortsController.AddSort(new BubbleSort);
+
+
+    std::weak_ptr<ISort> selectedSort;
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
 		renderer.Clear();
-		sortProgram.Render(renderer);
+		//sortProgram.Render(renderer);
 
 
 		ImGui_ImplOpenGL3_NewFrame();
@@ -91,24 +115,30 @@ int main()
 
 			if (ImGui::Button("Shuffle Massive"))
 			{
-				sortProgram.ShuffleMassive();
+				dataCtrl.Shuffle();
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Sort"))
 			{
 				LOG_INFO("Sort started!");
-				sortProgram.Begin();
+				if (auto sort = selectedSort.lock()) {
+					sort->Begin();
+				}
+				else {
+					LOG_WARN("Weak pointer is expired!");
+				}
 			}
-			
 
 			if (ImGui::TreeNode("Select sort algorithm:"))
 			{
-				for (unsigned int i = 0; i < (unsigned int)SortType::SORTS_COUNT; i++)
+				const auto& collection = SortsController.GetSortCollection();
+				for (unsigned int i = 0; i < collection.size(); i++)
 				{
-					if (ImGui::RadioButton(sortProgram.GetSortName((SortType)i).c_str(), &sortChooser, i))
+					if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i))
 					{
-						sortProgram.SetMethod((SortType)i);
-						LOG_INFO("{0} is choosed!", sortProgram.GetSortName((SortType)i).c_str());
+						selectedSort = collection[i];
+						LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
+						break;
 					}
 				}
 				ImGui::TreePop();

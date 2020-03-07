@@ -1,21 +1,25 @@
-#pragma once
-#include "Log.h"
-#include "Utility/DataTypes.h"
+#pragma once 
+
+#include <memory>
+#include <string>
+
+#include "Graphics/DataRenderer/IDataRenderer.h"
+#include "DataController/IDataController.h"
 
 class ISort
 {
 public:
-	ISort(ArrayInfo& arr_info);
+	ISort() = default;
 	virtual ~ISort() = default;
 
+	void Init(std::shared_ptr<IDataController> & dataController,
+				std::shared_ptr<IDataRenderer> & dataRednderer);
+
 	virtual void Begin() = 0;
-	std::string GetName() const	{ return name_;	}
+
+	inline std::string GetName() const { return m_name; }
 protected:
-	void Swap(int& lhs, int& rhs);
-	void MarkColor(unsigned int index, ColorName color);
-	void DisplaySorted();
-	void SleepFor(unsigned int miliseconds);
-protected:
-	std::string name_;
-	ArrayInfo& arr_info_;
+    std::shared_ptr<IDataController> m_dataController;
+    std::shared_ptr<IDataRenderer> m_dataRenderer;
+	std::string m_name;
 };

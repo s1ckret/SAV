@@ -1,33 +1,31 @@
 #include "BubbleSort.h"
 
-BubbleSort::BubbleSort(ArrayInfo & arr_info) : ISort(arr_info)
+#include "Log.h"
+
+BubbleSort::BubbleSort() 
+    : ISort()
 {
-	name_ = "BubbleSort";
+    m_name = "Bubble Sort";
+    LOG_TRACE(m_name, " has created.");
+}
+
+BubbleSort::~BubbleSort() {
+    
 }
 
 void BubbleSort::Begin()
 {
-	BubbleSortBegin(arr_info_.arr, arr_info_.nElements);
+    Data& array = m_dataController->GetData();
+	for (unsigned int i = 0; i < array.size(); m_dataRenderer->Increment(i))
+	{
+		for (unsigned int j = 0; j < array.size() - i - 1; m_dataRenderer->Increment(j))
+		{
+			if (array[j] > array[j + 1])
+			{
+				std::swap(array[j], array[j + 1]);
+			}
+		}
+	}
+
 	LOG_INFO("I am sorted !");
 }
-
-void BubbleSort::BubbleSortBegin(int * arr, unsigned int nElements)
-{
-	for (unsigned int i = 0; i < nElements; i++)
-	{
-		for (unsigned int j = 0; j < nElements - i - 1; j++)
-		{
-			MarkColor(j, ColorName::Red);
-			MarkColor(j + 1, ColorName::Red);
-			if (arr[j] > arr[j + 1])
-			{
-				Swap(arr[j], arr[j + 1]);
-			}
-			SleepFor(1);
-			MarkColor(j, ColorName::White);
-		}
-		MarkColor(nElements - 1 - i, ColorName::Green);
-	}
-}
-
-
