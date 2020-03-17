@@ -1,14 +1,13 @@
 #include "SortsController.h"
 
-SortsController::SortsController()
-    : m_dataController(nullptr)
-    , m_dataRenderer(nullptr)
-{
+#include "Log.h"
 
+SortsController::SortsController()
+{
 }
 
-SortsController::~SortsController() {
-
+SortsController::~SortsController()
+{
 }
 
 SortsController& SortsController::Get() {
@@ -16,23 +15,32 @@ SortsController& SortsController::Get() {
     return sortsController;
 }
 
-// TODO: Init Sort
-// TODO: Add check for duplicates
-// TODO: Template style
-// TODO: Get rid of it and replace with an enum
-void SortsController::AddSort(ISort * sort) {
-    sort->Init(m_dataController, m_dataRenderer);
-    m_sortCollection.push_back(std::shared_ptr<ISort>(sort));
+void SortsController::AddSort(std::shared_ptr<ISort> sort) {
+    m_sortCollection.push_back(sort);
 }
 
-void SortsController::SetDataRenderer(IDataRenderer * dataRenderer) {
-    m_dataRenderer = std::shared_ptr<IDataRenderer>(dataRenderer);
+void SortsController::SetSort(std::weak_ptr<ISort> sort) {
+    m_selectedSort = sort;
 }
 
-void SortsController::SetDataController(IDataController * dataController) {
-    m_dataController = std::shared_ptr<IDataController>(dataController);
+void SortsController::BeginSort() {
+    Join();
+    if (auto sort = m_selectedSort.lock()) {
+        m_thread_sort = std::move(std::thread(&ISort::Begin, std::ref(*sort.get())));
+    }
+    else {
+        LOG_WARN("Weak pointer is expired!");
+    }
 }
 
 const std::vector<std::shared_ptr<ISort>>& SortsController::GetSortCollection() const {
     return m_sortCollection;
+}
+
+void SortsController::Join()
+{
+	if (m_thread_sort.joinable())
+	{
+		m_thread_sort.join();
+	}
 }

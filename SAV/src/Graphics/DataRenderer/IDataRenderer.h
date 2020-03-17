@@ -7,6 +7,7 @@
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/VertexBufferLayout.h"
 
+#include "DataController/Array.h"
 #include "DataController/IDataController.h"
 
 #include <string>
@@ -22,7 +23,7 @@ public:
     virtual ~IDataRenderer() = default;
 
     // Data const ???
-    virtual void SetData(Data * data);
+    virtual void SetData(Array * data);
 
     // Set delay in ms.
     virtual void SetDelay(unsigned int delay);
@@ -50,9 +51,10 @@ protected:
 
 protected:
     // Data const ???
-    std::shared_ptr<Data> m_array;
+    std::shared_ptr<Array> m_array;
     std::vector<unsigned int> m_colors;
     int m_max_value;
+
     
     unsigned int m_delay;
 

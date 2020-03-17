@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <thread>
 
 #include "Sorts/ISort.h"
 #include "DataController/IDataController.h"
@@ -12,19 +13,21 @@ class SortsController
 public:
 	static SortsController& Get();
 
-    void AddSort(ISort * sort);
-    void SetDataRenderer(IDataRenderer * dataRenderer);
-    void SetDataController(IDataController * dataController);
+    void AddSort(std::shared_ptr<ISort> sort);
+
+    void SetSort(std::weak_ptr<ISort> sort);
+
+    void BeginSort();
 
     const std::vector<std::shared_ptr<ISort>>& GetSortCollection() const;
 
 	~SortsController();
 private:
 	SortsController();
+    void Join();
 
 private:
-    std::shared_ptr<IDataController> m_dataController;
-    std::shared_ptr<IDataRenderer> m_dataRenderer;
-
+    std::weak_ptr<ISort> m_selectedSort;
     std::vector<std::shared_ptr<ISort>> m_sortCollection;
+    std::thread m_thread_sort;
 };

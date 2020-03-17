@@ -41,7 +41,7 @@ void createVertex(vec2 offset)
 void main()
 {
 	out_color = u_color_marker;
-
+	
 	createVertex(vec2(0.f, 0.f));
 	createVertex(vec2(width, 0.f));
 	createVertex(vec2(width, height[0]));

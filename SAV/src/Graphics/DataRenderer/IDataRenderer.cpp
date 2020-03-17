@@ -10,21 +10,29 @@ extern GLFWwindow* window;
 IDataRenderer::IDataRenderer()
     : Renderer()
 {
-
+    
 }
 
-void IDataRenderer::SetData(Data * data) {
+void IDataRenderer::SetData(Array * data) {
     // TODO: Reload data when function is called second ... n-th time.
-    m_array = std::shared_ptr<Data>(data);
-
+    m_array = std::shared_ptr<Array>(data);
     std::vector<unsigned int>().swap(m_colors);
     m_colors.resize(m_array->size());
 
-    auto max_value_it = std::max_element(m_array->begin(), m_array->end());
-    m_max_value = *max_value_it;
+    for (auto it = m_colors.begin(); it != m_colors.end(); it++) {
+        *it = 0xffffff;
+    }
 
+    auto max_value_it = std::max_element(m_array->begin(), m_array->end());
+
+    m_max_value = max_value_it->Data();
+
+    // Position
     m_vbl.Push<float>(1);
-	m_vb.SetData(m_array.get(), m_array->size() * sizeof(int));
+    // Color
+    m_vbl.Push<float>(3);
+    
+	m_vb.SetData(m_array->begin(), m_array->size() * sizeof(Node));
 	m_va.AddBuffer(m_vb, m_vbl);
 
 	m_shader.SetFilePath("res/shaders/Basic.shader");
@@ -44,7 +52,6 @@ unsigned int IDataRenderer::Increment(unsigned int & i) {
         m_colors.at(i - 1) = 0xffffff;
     }
     m_colors.at(i) = 0xff0000;
-    Draw();
     SleepFor(m_delay);
     return ++i;
 }
@@ -55,8 +62,7 @@ void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
 
 // TODO: Batch Rendering
 void IDataRenderer::Draw() {
-    Renderer::Clear();
-	m_vb.SetNewData(m_array.get(), m_array->size() * sizeof(int));
+	m_vb.SetNewData(m_array->begin(), m_array->size() * sizeof(Node));
 	for (unsigned int i = 0; i < m_array->size(); i++)
 	{
 		m_shader.Bind();
@@ -71,9 +77,6 @@ void IDataRenderer::Draw() {
 		m_shader.setUniform3f("u_color_marker", color.x, color.y, color.z);
 		Renderer::Draw(m_va, m_shader, i);
 	}
-
-    // Swap the screen buffers
-    glfwSwapBuffers(window);
 }
 
 void IDataRenderer::SleepFor(unsigned int ms) {

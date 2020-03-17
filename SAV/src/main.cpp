@@ -85,18 +85,14 @@ int main()
 	dataCtrl.Generate(size, 500);
 	dataCtrl.Shuffle();
 
-	BasicDataRenderer dataRndr;
-	dataRndr.SetData(&dataCtrl.GetData());
-	dataRndr.SetDelay(5);
+	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
+	dataRndr->SetData(&dataCtrl.GetData());
+	dataRndr->SetDelay(5);
 
 	SortsController& SortsController = SortsController::Get();
-	SortsController.SetDataController(&dataCtrl);
-	SortsController.SetDataRenderer(&dataRndr);
 
-	SortsController.AddSort(new BubbleSort);
+	SortsController.AddSort(std::make_shared<BubbleSort>(dataCtrl.GetData(), dataRndr));
 
-
-    std::weak_ptr<ISort> selectedSort;
 	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -104,7 +100,7 @@ int main()
 		glfwPollEvents();
 		renderer.Clear();
 		//sortProgram.Render(renderer);
-
+		dataRndr->Draw();
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -121,12 +117,7 @@ int main()
 			if (ImGui::Button("Sort"))
 			{
 				LOG_INFO("Sort started!");
-				if (auto sort = selectedSort.lock()) {
-					sort->Begin();
-				}
-				else {
-					LOG_WARN("Weak pointer is expired!");
-				}
+				SortsController.BeginSort();
 			}
 
 			if (ImGui::TreeNode("Select sort algorithm:"))
@@ -136,7 +127,7 @@ int main()
 				{
 					if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i))
 					{
-						selectedSort = collection[i];
+						SortsController.SetSort(collection[i]);
 						LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
 						break;
 					}
