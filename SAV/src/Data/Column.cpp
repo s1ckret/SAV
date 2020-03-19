@@ -1,39 +1,42 @@
 #include "Column.h"
 
 // TODO: lock with mutex. Thread safe
-Column & Column::operator=(int rhs) {
+void Column::operator=(int rhs) {
     // mutex.lock();
-    data = rhs;
+    m_data = rhs;
     //mutex.unlock();
-    return *this;
+}
+
+void Column::operator=(glm::vec3 rgbColor) {
+    m_color = rgbColor;
 }
 
 bool Column::operator>(const Column & rhs) {
-    return this->data > rhs.data;
+    return this->m_data > rhs.m_data;
 }
 
 bool Column::operator<(const Column & rhs) {
-    return this->data < rhs.data;
+    return this->m_data < rhs.m_data;
 }
 
 bool Column::operator>=(const Column & rhs) {
-    return this->data >= rhs.data;
+    return this->m_data >= rhs.m_data;
 }
 
 bool Column::operator<=(const Column & rhs) {
-    return this->data <= rhs.data;
+    return this->m_data <= rhs.m_data;
 }
 
 // TODO: lock with mutex. Thread safe
 void Column::Swap(Column & rhs) {
     // mutex.lock
-    int tmp = this->data;
-    this->data = rhs.data;
-    rhs.data = tmp;
+    int tmp = this->m_data;
+    this->m_data = rhs.m_data;
+    rhs.m_data = tmp;
     // mutex.unlock
 }
 
-// Returns !copy! of data
+// Returns !copy! of m_data
 int Column::Data() const {
-    return data;
+    return m_data;
 }

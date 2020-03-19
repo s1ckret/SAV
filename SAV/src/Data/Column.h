@@ -2,12 +2,14 @@
 
 #include "glm/glm.hpp"
 
-struct Column {
+class Column {
 public:
     Column() = default;
     ~Column() = default;
 
-    Column & operator=(int rhs);
+    void operator=(int rhs);
+    void operator=(glm::vec3 rgbColor);
+
     bool operator>(const Column & rhs);
     bool operator<(const Column & rhs);
     bool operator>=(const Column & rhs);
@@ -19,6 +21,6 @@ public:
     // Returns !copy! of data
     int Data() const;
 private:
-    int data;
-    glm::vec3 color;
+    int m_data;
+    glm::vec3 m_color;
 };
