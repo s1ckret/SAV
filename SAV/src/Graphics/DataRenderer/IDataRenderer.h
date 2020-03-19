@@ -28,7 +28,7 @@ public:
     // Set delay in ms.
     virtual void SetDelay(unsigned int delay);
     // Redraw + Delay.
-    virtual unsigned int Increment(unsigned int & i);
+    virtual unsigned int Increment(unsigned int & index);
 
 //void SetDefaultColor(unsigned int index, unsigned int color);
 
@@ -51,9 +51,7 @@ protected:
 protected:
     // Data const ???
     std::shared_ptr<Array> m_array;
-    std::vector<unsigned int> m_colors;
     int m_max_value;
-
     
     unsigned int m_delay;
 

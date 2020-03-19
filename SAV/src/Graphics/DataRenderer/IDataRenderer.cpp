@@ -17,15 +17,8 @@ IDataRenderer::IDataRenderer()
 void IDataRenderer::SetData(Array * data) {
     // TODO: Reload data when function is called second ... n-th time.
     m_array = std::shared_ptr<Array>(data);
-    std::vector<unsigned int>().swap(m_colors);
-    m_colors.resize(m_array->size());
-
-    for (auto it = m_colors.begin(); it != m_colors.end(); it++) {
-        *it = 0xffffff;
-    }
 
     auto max_value_it = std::max_element(m_array->begin(), m_array->end());
-
     m_max_value = max_value_it->Data();
 
     // Position
@@ -48,17 +41,17 @@ void IDataRenderer::SetDelay(unsigned int delay) {
 }
 
 // TODO: Mark color
-unsigned int IDataRenderer::Increment(unsigned int & i) {
-    if ((i - 1) != static_cast<unsigned int>(-1)) {
-        m_colors.at(i - 1) = 0xffffff;
+unsigned int IDataRenderer::Increment(unsigned int & index) {
+    if (index != 0) {
+        (*m_array)[index] = ToRGB(0xffffff);
     }
-    m_colors.at(i) = 0xff0000;
+    (*m_array)[index] = ToRGB(0xff0000);
     SleepFor(m_delay);
-    return ++i;
+    return ++index;
 }
 
 void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
-    m_colors[index] = color;
+    (*m_array)[index] = ToRGB(color);
 }
 
 // TODO: Batch Rendering
@@ -68,10 +61,6 @@ void IDataRenderer::Draw() {
 	{
 		m_shader.Bind();
 		m_shader.setUniform1ui("i", i);
-
-        glm::vec3 color = ToRGB(m_colors[i]);
-		m_shader.setUniform3f("u_color_marker", color.x, color.y, color.z);
-
 		Renderer::Draw(m_va, m_shader, i);
 	}
 }
