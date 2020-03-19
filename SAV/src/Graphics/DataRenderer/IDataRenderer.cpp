@@ -5,12 +5,13 @@
 #include "Log.h"
 #include "glm/glm.hpp"
 
+#include "Utility.h"
+
 extern GLFWwindow* window;
 
 IDataRenderer::IDataRenderer()
     : Renderer()
 {
-    
 }
 
 void IDataRenderer::SetData(Array * data) {
@@ -68,13 +69,9 @@ void IDataRenderer::Draw() {
 		m_shader.Bind();
 		m_shader.setUniform1ui("i", i);
 
-        glm::vec3 color;
-
-        color.r = ((m_colors[i] >> 16) & 0xFF) / 255.0;  // Extract the RR byte
-        color.g = ((m_colors[i] >> 8) & 0xFF) / 255.0;   // Extract the GG byte
-        color.b = (m_colors[i] & 0xFF) / 255.0;        // Extract the BB byte
-
+        glm::vec3 color = ToRGB(m_colors[i]);
 		m_shader.setUniform3f("u_color_marker", color.x, color.y, color.z);
+
 		Renderer::Draw(m_va, m_shader, i);
 	}
 }

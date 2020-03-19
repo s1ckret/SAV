@@ -48,7 +48,6 @@ public:
     
 protected:
     void SleepFor(unsigned int ms);
-
 protected:
     // Data const ???
     std::shared_ptr<Array> m_array;
