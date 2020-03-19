@@ -2,14 +2,6 @@
 
 #include "Log.h"
 
-SortsController::SortsController()
-{
-}
-
-SortsController::~SortsController()
-{
-}
-
 SortsController& SortsController::Get() {
     static SortsController sortsController;
     return sortsController;
