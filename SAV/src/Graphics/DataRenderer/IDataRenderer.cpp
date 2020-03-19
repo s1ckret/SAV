@@ -32,7 +32,7 @@ void IDataRenderer::SetData(Array * data) {
     // Color
     m_vbl.Push<float>(3);
     
-	m_vb.SetData(m_array->begin(), m_array->size() * sizeof(Node));
+	m_vb.SetData(m_array->begin(), m_array->size() * sizeof(Column));
 	m_va.AddBuffer(m_vb, m_vbl);
 
 	m_shader.SetFilePath("res/shaders/Basic.shader");
@@ -62,7 +62,7 @@ void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
 
 // TODO: Batch Rendering
 void IDataRenderer::Draw() {
-	m_vb.SetNewData(m_array->begin(), m_array->size() * sizeof(Node));
+	m_vb.SetNewData(m_array->begin(), m_array->size() * sizeof(Column));
 	for (unsigned int i = 0; i < m_array->size(); i++)
 	{
 		m_shader.Bind();

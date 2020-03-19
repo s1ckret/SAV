@@ -7,7 +7,7 @@
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/VertexBufferLayout.h"
 
-#include "DataController/Array.h"
+#include "Data/Array.h"
 #include "DataController/IDataController.h"
 
 #include <string>
