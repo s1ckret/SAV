@@ -13,6 +13,9 @@ public:
     bool operator>=(const Column & rhs);
     bool operator<=(const Column & rhs);
     
+    // Only swap data
+    void Swap(Column & rhs);
+
     // Returns !copy! of data
     int Data() const;
 private:

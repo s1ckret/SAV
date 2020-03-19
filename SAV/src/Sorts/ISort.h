@@ -19,12 +19,6 @@ public:
 
 	inline std::string GetName() const { return m_name; }
 
-	// temporary
-	inline void Swap(Column & lhs, Column & rhs) {
-		Column tmp = lhs;
-		lhs = rhs;
-		rhs = tmp;
-	}
 protected:
     std::shared_ptr<IDataRenderer> m_dataRenderer;
 	Array & m_array;

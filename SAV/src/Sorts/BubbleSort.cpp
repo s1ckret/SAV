@@ -21,7 +21,7 @@ void BubbleSort::Begin()
 		{
 			if (m_array[j] > m_array[j + 1])
 			{
-				Swap(m_array[j], m_array[j + 1]);
+				m_array[j].Swap(m_array[j + 1]);
 			}
 		}
 	}
