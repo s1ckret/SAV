@@ -23,10 +23,10 @@ void VertexBuffer::SetData(const void * data, unsigned int size)
 	GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW));
 }
 
-void VertexBuffer::SetNewData(const void * data, unsigned int size)
+void VertexBuffer::UpdateData(const void * data, unsigned int size)
 {
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW));
+	GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, size, data));
 }
 
 void VertexBuffer::Bind() const

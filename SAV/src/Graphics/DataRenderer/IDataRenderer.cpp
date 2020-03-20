@@ -59,7 +59,7 @@ void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
 
 // TODO: Batch Rendering
 void IDataRenderer::Draw() {
-	m_vb.SetNewData(m_array->begin(), m_array->size() * sizeof(Column));
+	m_vb.UpdateData(m_array->begin(), m_array->size() * sizeof(Column));
     Renderer::Draw(m_va, m_shader, m_array->size());
 }
 
