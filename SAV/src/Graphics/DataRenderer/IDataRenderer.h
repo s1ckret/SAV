@@ -15,7 +15,7 @@
 
 // TODO: classes with I prefix is interface only.
 // TODO: Create basic classes that implements all these functions.
-
+// TODO: SetShader function
 class IDataRenderer : public Renderer
 {
 public:
@@ -51,7 +51,7 @@ protected:
 protected:
     // Data const ???
     std::shared_ptr<Array> m_array;
-    int m_max_value;
+    unsigned int m_max_value;
     
     unsigned int m_delay;
 

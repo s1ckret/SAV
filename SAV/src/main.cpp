@@ -77,7 +77,7 @@ int main()
 
 	Renderer renderer;	
 	
-	const unsigned int size = 100;
+	const unsigned int size = 10000;
 	// SortProgram& sortProgram = SortProgram::Get();
 	// sortProgram.GenerateMassive(size, 500);
 
@@ -87,7 +87,7 @@ int main()
 
 	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
 	dataRndr->SetData(&dataCtrl.GetData());
-	dataRndr->SetDelay(5);
+	dataRndr->SetDelay(1);
 
 	SortsController& SortsController = SortsController::Get();
 

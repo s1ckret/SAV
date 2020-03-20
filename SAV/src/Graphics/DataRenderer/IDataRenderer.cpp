@@ -29,11 +29,14 @@ void IDataRenderer::SetData(Array * data) {
 	m_vb.SetData(m_array->begin(), m_array->size() * sizeof(Column));
 	m_va.AddBuffer(m_vb, m_vbl);
 
-	m_shader.SetFilePath("res/shaders/Basic.shader");
+	m_shader.SetFilePath("res/shaders/New.shader");
 	m_shader.Bind();
-	m_shader.setUniform1ui("arr_size", m_array->size());
-    LOG_WARN("Max value {0}", m_max_value);
-	m_shader.setUniform1i("max_value", m_max_value);
+
+    LOG_WARN("Array size: {0}", m_array->size());
+    LOG_WARN("Max value: {0}", m_max_value);
+
+	m_shader.setUniform1ui("u_arr_size", m_array->size());
+	m_shader.setUniform1ui("u_arr_max_value", m_max_value);
 }
 
 void IDataRenderer::SetDelay(unsigned int delay) {
@@ -43,9 +46,9 @@ void IDataRenderer::SetDelay(unsigned int delay) {
 // TODO: Mark color
 unsigned int IDataRenderer::Increment(unsigned int & index) {
     if (index != 0) {
-        (*m_array)[index] = ToRGB(0xffffff);
+    //    (*m_array)[index] = ToRGB(0xffffff);
     }
-    (*m_array)[index] = ToRGB(0xff0000);
+    //(*m_array)[index] = ToRGB(0xff0000);
     SleepFor(m_delay);
     return ++index;
 }
@@ -57,12 +60,7 @@ void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
 // TODO: Batch Rendering
 void IDataRenderer::Draw() {
 	m_vb.SetNewData(m_array->begin(), m_array->size() * sizeof(Column));
-	for (unsigned int i = 0; i < m_array->size(); i++)
-	{
-		m_shader.Bind();
-		m_shader.setUniform1ui("i", i);
-		Renderer::Draw(m_va, m_shader, i);
-	}
+    Renderer::Draw(m_va, m_shader, m_array->size());
 }
 
 void IDataRenderer::SleepFor(unsigned int ms) {

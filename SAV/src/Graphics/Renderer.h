@@ -32,5 +32,7 @@ public:
 
 	void Clear() const;
 
-	void Draw(const VertexArray& va, const Shader& shader, unsigned int vertex_count) const;
+	void Draw(const VertexArray& va, const Shader& shader) const;
+	// TODO: Batch renderer
+	void Draw(const VertexArray& va, const Shader& shader, unsigned int count) const;
 };
