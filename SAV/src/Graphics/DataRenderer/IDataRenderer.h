@@ -12,6 +12,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 // TODO: classes with I prefix is interface only.
 // TODO: Create basic classes that implements all these functions.
@@ -30,7 +31,7 @@ public:
     // Redraw + Delay.
     virtual unsigned int Increment(unsigned int & index);
 
-//void SetDefaultColor(unsigned int index, unsigned int color);
+    void SetDefaultColor(unsigned int index, unsigned int color);
 
 //void SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
 
@@ -49,10 +50,10 @@ public:
 protected:
     void SleepFor(unsigned int ms);
 protected:
-    // Data const ???
     std::shared_ptr<Array> m_array;
+    std::vector<unsigned int> m_default_color;
+
     unsigned int m_max_value;
-    
     unsigned int m_delay;
 
 

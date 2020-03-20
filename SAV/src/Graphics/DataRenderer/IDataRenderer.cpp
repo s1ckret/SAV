@@ -18,6 +18,11 @@ void IDataRenderer::SetData(Array * data) {
     // TODO: Reload data when function is called second ... n-th time.
     m_array = std::shared_ptr<Array>(data);
 
+    m_default_color.resize(m_array->size());
+    for (auto it = m_default_color.begin(); it != m_default_color.end(); it++) {
+        *it = 0xffffff;
+    }
+
     auto max_value_it = std::max_element(m_array->begin(), m_array->end());
     m_max_value = max_value_it->Data();
 
@@ -45,11 +50,15 @@ void IDataRenderer::SetDelay(unsigned int delay) {
 
 unsigned int IDataRenderer::Increment(unsigned int & index) {
     if (index != 0) {
-        MarkColor(index - 1, 0xffffff);
+        MarkColor(index - 1, m_default_color[index - 1]);
     }
     MarkColor(index, 0xff0000);
     SleepFor(m_delay);
     return ++index;
+}
+
+void IDataRenderer::SetDefaultColor(unsigned int index, unsigned int color) {
+    m_default_color[index] = color;
 }
 
 void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
