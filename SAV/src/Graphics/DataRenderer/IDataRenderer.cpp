@@ -61,8 +61,26 @@ void IDataRenderer::SetDefaultColor(unsigned int index, unsigned int color) {
     m_default_color[index] = color;
 }
 
+void IDataRenderer::SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color) {
+    // TODO: Debug flag
+    assert(lhs_index < rhs_index);
+
+    for (unsigned int i = lhs_index; i < rhs_index + 1; i++) {
+        SetDefaultColor(i, color);
+    }
+}
+
 void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
     (*m_array)[index] = ToRGB(color);
+}
+
+void IDataRenderer::MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color) {
+    // TODO: Debug flag
+    assert(lhs_index < rhs_index);
+
+    for (unsigned int i = lhs_index; i < rhs_index + 1; i++) {
+        MarkColor(i, color);
+    }    
 }
 
 void IDataRenderer::Draw() {

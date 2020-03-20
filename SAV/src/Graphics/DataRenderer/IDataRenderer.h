@@ -33,7 +33,7 @@ public:
 
     void SetDefaultColor(unsigned int index, unsigned int color);
 
-//void SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
+    void SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
 
 // Remember previous index and redraw it to default color
 //void MarkColor(std::string name, unsigned int index, unsigned int color);
@@ -43,7 +43,7 @@ public:
 
 //void MarkColorArea(std::string name, unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
 
-//void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
+    void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
     
     virtual void Draw();
     
