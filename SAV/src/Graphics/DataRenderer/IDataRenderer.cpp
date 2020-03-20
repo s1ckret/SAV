@@ -49,10 +49,22 @@ void IDataRenderer::SetDelay(unsigned int delay) {
 }
 
 unsigned int IDataRenderer::Increment(unsigned int & index) {
-    if (index != 0) {
-        MarkColor(index - 1, m_default_color[index - 1]);
+    SleepFor(m_delay);
+    return ++index;
+}
+
+unsigned int IDataRenderer::Increment(std::string name, unsigned int & index, unsigned int color) {
+    auto it = m_iterator_color.find(name);
+    if (it != m_iterator_color.end()) {
+        MarkColor(it->second, m_default_color[index]);
+        it->second = index;
+        MarkColor(it->second, color);
     }
-    MarkColor(index, 0xff0000);
+    else {
+        m_iterator_color.insert( {name, index} );
+        MarkColor(index, color);    
+    }
+    
     SleepFor(m_delay);
     return ++index;
 }
@@ -81,6 +93,11 @@ void IDataRenderer::MarkColorArea(unsigned int lhs_index, unsigned int rhs_index
     for (unsigned int i = lhs_index; i < rhs_index + 1; i++) {
         MarkColor(i, color);
     }    
+}
+
+void IDataRenderer::MarkDefaultColor(unsigned int index, unsigned int color) {
+    MarkColor(index, color);
+    SetDefaultColor(index, color);
 }
 
 void IDataRenderer::Draw() {

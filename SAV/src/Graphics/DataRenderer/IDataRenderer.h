@@ -13,6 +13,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <map>
 
 // TODO: classes with I prefix is interface only.
 // TODO: Create basic classes that implements all these functions.
@@ -24,27 +25,26 @@ public:
     virtual ~IDataRenderer() = default;
 
     // Data const ???
-    virtual void SetData(Array * data);
+    void SetData(Array * data);
 
     // Set delay in ms.
-    virtual void SetDelay(unsigned int delay);
+    void SetDelay(unsigned int delay);
     // Redraw + Delay.
-    virtual unsigned int Increment(unsigned int & index);
+    unsigned int Increment(unsigned int & index);
+
+    unsigned int Increment(std::string name, unsigned int & index, unsigned int color);
 
     void SetDefaultColor(unsigned int index, unsigned int color);
 
     void SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
 
-// Remember previous index and redraw it to default color
-//void MarkColor(std::string name, unsigned int index, unsigned int color);
-
     // Just mark color
-    virtual void MarkColor(unsigned int index, unsigned int color);
-
-//void MarkColorArea(std::string name, unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
+    void MarkColor(unsigned int index, unsigned int color);
 
     void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
     
+    void MarkDefaultColor(unsigned int index, unsigned int color);
+
     virtual void Draw();
     
 protected:
@@ -52,6 +52,8 @@ protected:
 protected:
     std::shared_ptr<Array> m_array;
     std::vector<unsigned int> m_default_color;
+    // Key = name, value = index
+    std::map<std::string, unsigned int> m_iterator_color;
 
     unsigned int m_max_value;
     unsigned int m_delay;
