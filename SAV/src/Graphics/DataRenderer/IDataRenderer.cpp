@@ -43,12 +43,11 @@ void IDataRenderer::SetDelay(unsigned int delay) {
     m_delay = delay;
 }
 
-// TODO: Mark color
 unsigned int IDataRenderer::Increment(unsigned int & index) {
     if (index != 0) {
-    //    (*m_array)[index] = ToRGB(0xffffff);
+        MarkColor(index - 1, 0xffffff);
     }
-    //(*m_array)[index] = ToRGB(0xff0000);
+    MarkColor(index, 0xff0000);
     SleepFor(m_delay);
     return ++index;
 }
@@ -57,7 +56,6 @@ void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
     (*m_array)[index] = ToRGB(color);
 }
 
-// TODO: Batch Rendering
 void IDataRenderer::Draw() {
 	m_vb.UpdateData(m_array->begin(), m_array->size() * sizeof(Column));
     Renderer::Draw(m_va, m_shader, m_array->size());

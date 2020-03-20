@@ -77,7 +77,7 @@ int main()
 
 	Renderer renderer;	
 	
-	const unsigned int size = 10000;
+	const unsigned int size = 100;
 	// SortProgram& sortProgram = SortProgram::Get();
 	// sortProgram.GenerateMassive(size, 500);
 
