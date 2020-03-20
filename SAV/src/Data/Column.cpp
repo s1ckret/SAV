@@ -1,5 +1,11 @@
 #include "Column.h"
 
+Column::Column() 
+    : m_data(0)
+    , m_color({255.f, 255.f, 255.f})
+{
+}
+
 // TODO: lock with mutex. Thread safe
 void Column::operator=(int rhs) {
     // mutex.lock();

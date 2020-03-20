@@ -4,7 +4,7 @@
 
 class Column {
 public:
-    Column() = default;
+    Column();
     ~Column() = default;
 
     void operator=(int rhs);
