@@ -2,7 +2,7 @@
 
 Column::Column() 
     : m_data(0)
-    , m_color({255.f, 255.f, 255.f})
+    , m_color({1.f, 1.f, 1.f})
 {
 }
 
@@ -45,4 +45,8 @@ void Column::Swap(Column & rhs) {
 // Returns !copy! of m_data
 int Column::Data() const {
     return m_data;
+}
+
+glm::vec3 Column::GetColor() const {
+    return m_color;
 }

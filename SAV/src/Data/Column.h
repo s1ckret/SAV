@@ -20,6 +20,7 @@ public:
 
     // Returns !copy! of data
     int Data() const;
+    glm::vec3 GetColor() const;
 private:
     int m_data;
     glm::vec3 m_color;
