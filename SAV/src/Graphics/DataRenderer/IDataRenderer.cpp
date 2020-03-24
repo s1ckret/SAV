@@ -53,20 +53,36 @@ unsigned int IDataRenderer::Increment(unsigned int & index) {
     return ++index;
 }
 
-unsigned int IDataRenderer::Increment(std::string name, unsigned int & index, unsigned int color) {
+void IDataRenderer::RenderIterator(std::string name, unsigned int index, unsigned int color) {
     auto it = m_iterator_color.find(name);
+    const auto & currentColumn = (*m_array)[index];
     if (it != m_iterator_color.end()) {
-        MarkColor(it->second, m_default_color[index]);
-        it->second = index;
-        MarkColor(it->second, color);
+        // Restore previous color
+        MarkColor(it->second.index, it->second.color);
+        // Save current color and position
+        it->second.color = ToHex(currentColumn.GetColor());
+        it->second.index = index;
+        // Mark with new color
+        MarkColor(index, color);
     }
     else {
-        m_iterator_color.insert( {name, index} );
+        // Save current color and position
+        m_iterator_color.emplace(name, ColumnInfo{index, ToHex(currentColumn.GetColor())});
+        // Mark with new color
         MarkColor(index, color);    
     }
-    
     SleepFor(m_delay);
-    return ++index;
+}
+
+void IDataRenderer::RemoveIterator(std::string name) {
+    auto it = m_iterator_color.find(name);
+    if (it != m_iterator_color.end()) {
+        m_iterator_color.erase(it);
+        LOG_TRACE("Iterator has erased !");
+    }
+    else {
+        LOG_ERROR("Error: Can not find \"{0}\" iterator !", name);
+    }
 }
 
 void IDataRenderer::SetDefaultColor(unsigned int index, unsigned int color) {

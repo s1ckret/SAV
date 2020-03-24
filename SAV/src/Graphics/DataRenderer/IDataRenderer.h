@@ -32,7 +32,9 @@ public:
     // Redraw + Delay.
     unsigned int Increment(unsigned int & index);
 
-    unsigned int Increment(std::string name, unsigned int & index, unsigned int color);
+    void RenderIterator(std::string name, unsigned int index, unsigned int color);
+
+    void RemoveIterator(std::string name);
 
     void SetDefaultColor(unsigned int index, unsigned int color);
 
@@ -53,7 +55,11 @@ protected:
     std::shared_ptr<Array> m_array;
     std::vector<unsigned int> m_default_color;
     // Key = name, value = index
-    std::map<std::string, unsigned int> m_iterator_color;
+    struct ColumnInfo {
+        unsigned int index;
+        unsigned int color;
+    };
+    std::map<std::string, ColumnInfo> m_iterator_color;
 
     unsigned int m_max_value;
     unsigned int m_delay;

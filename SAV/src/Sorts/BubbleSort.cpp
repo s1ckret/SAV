@@ -15,10 +15,12 @@ BubbleSort::~BubbleSort() {
 
 void BubbleSort::Begin()
 {
-	for (unsigned int i = 0; i < m_array.size(); m_dataRenderer->Increment("i", i, 0xff0fff))
+	for (unsigned int i = 0; i < m_array.size(); i++)
 	{
-		for (unsigned int j = 0; j < m_array.size() - i - 1; m_dataRenderer->Increment("j", j, 0xff000f))
+		m_dataRenderer->RenderIterator("i", i, 0xff0fff);
+		for (unsigned int j = 0; j < m_array.size() - i - 1; j++)
 		{
+			m_dataRenderer->RenderIterator("j", j, 0xff0f00);
 			if (m_array[j] > m_array[j + 1])
 			{
 				m_array[j].Swap(m_array[j + 1]);
