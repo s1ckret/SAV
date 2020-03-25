@@ -12,11 +12,8 @@
 
 #include <string>
 #include <memory>
-#include <vector>
 #include <map>
 
-// TODO: classes with I prefix is interface only.
-// TODO: Create basic classes that implements all these functions.
 // TODO: SetShader function
 class IDataRenderer : public Renderer
 {
