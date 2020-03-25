@@ -17,19 +17,19 @@ void Column::operator=(glm::vec3 rgbColor) {
     m_color = rgbColor;
 }
 
-bool Column::operator>(const Column & rhs) {
+bool Column::operator>(const Column & rhs) const {
     return this->m_data > rhs.m_data;
 }
 
-bool Column::operator<(const Column & rhs) {
+bool Column::operator<(const Column & rhs) const {
     return this->m_data < rhs.m_data;
 }
 
-bool Column::operator>=(const Column & rhs) {
+bool Column::operator>=(const Column & rhs) const {
     return this->m_data >= rhs.m_data;
 }
 
-bool Column::operator<=(const Column & rhs) {
+bool Column::operator<=(const Column & rhs) const {
     return this->m_data <= rhs.m_data;
 }
 

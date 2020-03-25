@@ -15,15 +15,15 @@ IDataRenderer::IDataRenderer()
 }
 
 void IDataRenderer::SetData(Array * data) {
-    // TODO: Reload data when function is called second ... n-th time.
-    m_array = std::shared_ptr<Array>(data);
+    m_array = data;
 
-    m_default_color.resize(m_array->size());
+    std::vector<unsigned int>().swap(m_default_color);
+    m_default_color.resize(m_array->Size());
     for (auto it = m_default_color.begin(); it != m_default_color.end(); it++) {
         *it = 0xffffff;
     }
 
-    auto max_value_it = std::max_element(m_array->begin(), m_array->end());
+    auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
     m_max_value = max_value_it->Data();
 
     // Position
@@ -31,16 +31,12 @@ void IDataRenderer::SetData(Array * data) {
     // Color
     m_vbl.Push<float>(3);
     
-	m_vb.SetData(m_array->begin(), m_array->size() * sizeof(Column));
+	m_vb.SetData(m_array->Begin(), m_array->Size() * sizeof(Column));
 	m_va.AddBuffer(m_vb, m_vbl);
 
 	m_shader.SetFilePath("res/shaders/New.shader");
 	m_shader.Bind();
-
-    LOG_WARN("Array size: {0}", m_array->size());
-    LOG_WARN("Max value: {0}", m_max_value);
-
-	m_shader.setUniform1ui("u_arr_size", m_array->size());
+	m_shader.setUniform1ui("u_arr_size", m_array->Size());
 	m_shader.setUniform1ui("u_arr_max_value", m_max_value);
 }
 
@@ -112,8 +108,8 @@ void IDataRenderer::MarkDefaultColor(unsigned int index, unsigned int color) {
 }
 
 void IDataRenderer::Draw() {
-	m_vb.UpdateData(m_array->begin(), m_array->size() * sizeof(Column));
-    Renderer::Draw(m_va, m_shader, m_array->size());
+	m_vb.UpdateData(m_array->Begin(), m_array->Size() * sizeof(Column));
+    Renderer::Draw(m_va, m_shader, m_array->Size());
 }
 
 void IDataRenderer::SleepFor(unsigned int ms) {

@@ -18,9 +18,9 @@ BasicDataController::~BasicDataController() {
 void BasicDataController::Generate(unsigned int size, unsigned int max_value) {
     // Delete data in array
     
-    m_array.resize(size);
+    m_array.Resize(size);
 
-    for (unsigned int i = 0; i < m_array.size(); i++) {
+    for (unsigned int i = 0; i < m_array.Size(); i++) {
         m_array[i] = rand() % max_value;
     }
 } 
@@ -31,5 +31,5 @@ void BasicDataController::Shuffle() {
 
     LOG_CRITICAL("SHUFFLING!");
     // TOTEST:
-    std::shuffle(m_array.begin(), m_array.end(), generator);
+    std::shuffle(m_array.Begin(), m_array.End(), generator);
 }

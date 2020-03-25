@@ -10,15 +10,14 @@ public:
     Array() = default;
     ~Array() = default;
 
-    void resize(size_t size);
+    void Resize(size_t size);
 
     Column & operator[](size_t index);
-    size_t size();
+    size_t Size() const;
 
-    Column * begin();
-    Column * end();
+    Column * Begin() const;
+    Column * End() const;
 private:
-    // In Nodes, not in bytes.
     size_t m_size;
     std::shared_ptr<Column> m_array;
 

@@ -10,15 +10,14 @@ public:
     void operator=(int rhs);
     void operator=(glm::vec3 rgbColor);
 
-    bool operator>(const Column & rhs);
-    bool operator<(const Column & rhs);
-    bool operator>=(const Column & rhs);
-    bool operator<=(const Column & rhs);
+    bool operator>(const Column & rhs) const;
+    bool operator<(const Column & rhs) const;
+    bool operator>=(const Column & rhs) const;
+    bool operator<=(const Column & rhs) const;
     
     // Only swap data
     void Swap(Column & rhs);
 
-    // Returns !copy! of data
     int Data() const;
     glm::vec3 GetColor() const;
 private:

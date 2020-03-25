@@ -2,7 +2,7 @@
 
 #include "Log.h"
 
-void Array::resize(size_t size) {
+void Array::Resize(size_t size) {
     LOG_CRITICAL("Resizing array. Ref count = {0}", m_array.use_count());
 
     m_size = size;
@@ -17,22 +17,22 @@ Column & Array::operator[](size_t index) {
     return m_array.get()[index];
 }
 
-size_t Array::size() {
+size_t Array::Size() const {
     return m_size;
 }
 
-Column * Array::begin() {
-    Column * returnNode = nullptr;
+Column * Array::Begin() const {
+    Column * beginColumn = nullptr;
     if (m_size) {
-        returnNode = &m_array.get()[0];
+        beginColumn = &m_array.get()[0];
     }
-    return returnNode;
+    return beginColumn;
 }
 
-Column * Array::end() {
-    Column * returnNode = nullptr;
+Column * Array::End() const {
+    Column * endColumn = nullptr;
     if (m_size) {
-        returnNode = &m_array.get()[m_size - 1];
+        endColumn = &m_array.get()[m_size - 1];
     }
-    return returnNode;
+    return endColumn;
 }

@@ -50,7 +50,7 @@ public:
 protected:
     void SleepFor(unsigned int ms);
 protected:
-    std::shared_ptr<Array> m_array;
+    Array * m_array;
     std::vector<unsigned int> m_default_color;
     // Key = name, value = index
     struct ColumnInfo {
@@ -61,7 +61,6 @@ protected:
 
     unsigned int m_max_value;
     unsigned int m_delay;
-
 
 // TODO: Abstract with Drawable class
 	VertexBufferLayout m_vbl;
