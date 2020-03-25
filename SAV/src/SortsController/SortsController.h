@@ -21,7 +21,7 @@ public:
 
     const std::vector<std::shared_ptr<ISort>>& GetSortCollection() const;
 
-	~SortsController() = default;
+	~SortsController();
 private:
 	SortsController() = default;
     void Join();

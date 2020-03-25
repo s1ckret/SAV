@@ -2,6 +2,10 @@
 
 #include "Log.h"
 
+SortsController::~SortsController() {
+    Join();
+}
+
 SortsController& SortsController::Get() {
     static SortsController sortsController;
     return sortsController;
