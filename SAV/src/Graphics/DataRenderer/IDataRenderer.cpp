@@ -2,17 +2,10 @@
 
 #include <algorithm>
 #include <thread>
+
 #include "Log.h"
 #include "glm/glm.hpp"
-
 #include "Utility.h"
-
-extern GLFWwindow* window;
-
-IDataRenderer::IDataRenderer()
-    : Renderer()
-{
-}
 
 void IDataRenderer::SetData(Array * data) {
     m_array = data;
@@ -34,8 +27,8 @@ void IDataRenderer::SetData(Array * data) {
 	m_shader.setUniform1ui("u_arr_max_value", m_max_value);
 }
 
-void IDataRenderer::SetDelay(unsigned int delay) {
-    m_delay = delay;
+void IDataRenderer::SetDelay(unsigned int ms) {
+    m_delay = ms;
 }
 
 void IDataRenderer::RenderIterator(std::string name, unsigned int index, unsigned int color) {

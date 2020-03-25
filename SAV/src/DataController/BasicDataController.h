@@ -4,8 +4,8 @@
 
 class BasicDataController : public IDataController {
 public:
-    BasicDataController();
-    ~BasicDataController();
+    BasicDataController() = default;
+    ~BasicDataController() = default;
 
     void Generate(unsigned int size, unsigned int max_value) override;
 

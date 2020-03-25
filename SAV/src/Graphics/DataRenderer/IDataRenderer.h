@@ -21,21 +21,20 @@
 class IDataRenderer : public Renderer
 {
 public:
-	IDataRenderer();
+	IDataRenderer() = default;
     virtual ~IDataRenderer() = default;
 
-    void SetData(Array * data);
+    virtual void SetData(Array * data);
 
-    // Set delay in ms.
-    void SetDelay(unsigned int delay);
+    virtual void SetDelay(unsigned int ms);
 
-    void RenderIterator(std::string name, unsigned int index, unsigned int color);
+    virtual void RenderIterator(std::string name, unsigned int index, unsigned int color);
 
-    void RemoveIterator(std::string name);
+    virtual void RemoveIterator(std::string name);
 
-    void MarkColor(unsigned int index, unsigned int color);
+    virtual void MarkColor(unsigned int index, unsigned int color);
 
-    void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
+    virtual void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
   
     virtual void Draw();
     

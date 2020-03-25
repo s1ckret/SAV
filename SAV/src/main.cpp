@@ -75,11 +75,7 @@ int main()
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	Renderer renderer;	
-	
 	const unsigned int size = 100;
-	// SortProgram& sortProgram = SortProgram::Get();
-	// sortProgram.GenerateMassive(size, 500);
 
 	BasicDataController dataCtrl;
 	dataCtrl.Generate(size, 500);
@@ -98,7 +94,7 @@ int main()
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
-		renderer.Clear();
+		dataRndr->Clear();
 		//sortProgram.Render(renderer);
 		dataRndr->Draw();
 
