@@ -89,6 +89,7 @@ int main()
 
 			if (ImGui::Button("Shuffle Massive"))
 			{
+				dataRndr->Reset();
 				dataCtrl.Shuffle();
 			}
 			ImGui::SameLine();

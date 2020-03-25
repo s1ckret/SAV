@@ -81,6 +81,11 @@ void IDataRenderer::Draw() {
     Renderer::Draw(m_va, m_shader, m_array->Size());
 }
 
+void IDataRenderer::Reset() {
+    m_iterator_color.clear();
+    MarkColorArea(0, m_array->Size(), 0xffffff);
+}
+
 void IDataRenderer::SleepFor(unsigned int ms) {
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 }

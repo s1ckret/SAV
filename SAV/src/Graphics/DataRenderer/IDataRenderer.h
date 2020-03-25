@@ -34,6 +34,8 @@ public:
     virtual void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
   
     virtual void Draw();
+
+    virtual void Reset();
     
 protected:
     void SleepFor(unsigned int ms);
