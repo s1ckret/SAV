@@ -29,8 +29,6 @@ public:
 
     // Set delay in ms.
     void SetDelay(unsigned int delay);
-    // Redraw + Delay.
-    unsigned int Increment(unsigned int & index);
 
     void RenderIterator(std::string name, unsigned int index, unsigned int color);
 

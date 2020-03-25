@@ -48,11 +48,6 @@ void IDataRenderer::SetDelay(unsigned int delay) {
     m_delay = delay;
 }
 
-unsigned int IDataRenderer::Increment(unsigned int & index) {
-    SleepFor(m_delay);
-    return ++index;
-}
-
 void IDataRenderer::RenderIterator(std::string name, unsigned int index, unsigned int color) {
     auto it = m_iterator_color.find(name);
     const auto & currentColumn = (*m_array)[index];
