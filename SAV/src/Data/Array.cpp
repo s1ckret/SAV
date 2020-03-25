@@ -34,5 +34,6 @@ Column * Array::End() const {
     if (m_size) {
         endColumn = &m_array.get()[m_size - 1];
     }
+    endColumn++;
     return endColumn;
 }

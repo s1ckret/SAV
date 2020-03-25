@@ -17,8 +17,5 @@ void BasicDataController::Generate(unsigned int size, unsigned int max_value) {
 void BasicDataController::Shuffle() {
     std::random_device rd;
     std::mt19937 generator(rd());
-
-    LOG_CRITICAL("SHUFFLING!");
-    // TOTEST:
     std::shuffle(m_array.Begin(), m_array.End(), generator);
 }
