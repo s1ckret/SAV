@@ -3,14 +3,12 @@
 #include "Log.h"
 
 void Array::Resize(size_t size) {
-    LOG_CRITICAL("Resizing array. Ref count = {0}", m_array.use_count());
-
     m_size = size;
-    std::shared_ptr<Column> new_array(new Column[m_size], std::default_delete<Column[]>());
+    std::shared_ptr<Column> new_array(new Column[m_size], [](auto ptr) {
+        LOG_INFO("Delete[] from lamda");
+        delete[] ptr;
+    });
     m_array.swap(new_array);
-
-    // Is m_array deleted ?
-    LOG_CRITICAL("Resizing array. Ref count after swap = {0}", m_array.use_count());
 }
 
 Column & Array::operator[](size_t index) {

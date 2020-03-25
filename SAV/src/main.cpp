@@ -79,6 +79,7 @@ int main()
 
 	BasicDataController dataCtrl;
 	dataCtrl.Generate(size, 500);
+	dataCtrl.Generate(size, 500);
 	dataCtrl.Shuffle();
 
 	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
