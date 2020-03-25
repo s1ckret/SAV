@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "Data/Column.h"
-#include "glm/glm.hpp"
 
 class Array {
 public:

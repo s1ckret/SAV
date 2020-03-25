@@ -14,10 +14,6 @@ bool GLLogCall(const char * function, const char * file, int line)
 	return true;
 }
 
-Renderer::Renderer()
-{
-}
-
 void Renderer::Clear() const
 {
 	GLCall(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));

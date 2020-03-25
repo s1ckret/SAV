@@ -28,8 +28,9 @@ bool GLLogCall(const char * function, const char * file, int line);
 class Renderer
 {
 public:
-	Renderer();
-
+	Renderer() = default;
+	~Renderer() = default;
+	
 	void Clear() const;
 
 	void Draw(const VertexArray& va, const Shader& shader) const;

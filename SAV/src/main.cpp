@@ -1,23 +1,11 @@
-#include <iostream>
-
-// GLEW
 #include "GL/glew.h"
-
-// GLFW
 #include "GLFW/glfw3.h"
-
-#include "Log.h"
 
 #include "imgui/imgui.h"
 #include "imgui/examples/imgui_impl_glfw.h"
 #include "imgui/examples/imgui_impl_opengl3.h"
 
-#include "Graphics/IndexBuffer.h"
-#include "Graphics/Renderer.h"
-#include "Graphics/Shader.h"
-#include "Graphics/VertexArray.h"
-#include "Graphics/VertexBuffer.h"
-#include "Graphics/VertexBufferLayout.h"
+#include "Log.h"
 
 #include "DataController/IDataController.h"
 #include "DataController/BasicDataController.h"
@@ -29,23 +17,21 @@
 
 #include "Sorts/BubbleSort.h"
 
-// Window dimensions
-const GLuint WIDTH = 1200, HEIGHT = 800;
-GLFWwindow* window;
-// The MAIN function, from here we start the application and run the game loop
 int main()
 {
+	const GLuint WIDTH = 1200, HEIGHT = 800;
+	GLFWwindow* window;
+
 	Log::Init();
 	LOG_INFO("Starting GLFW context, OpenGL 3.3");
-	// Init GLFW
+
 	glfwInit();
-	// Set all the required options for GLFW
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	// Create a GLFWwindow object that we can use for GLFW's functions
 	window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);    
 	if (window == nullptr)
 	{
@@ -54,24 +40,23 @@ int main()
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
+
 	glewExperimental = GL_TRUE;
-	// Initialize GLEW to setup the OpenGL Function pointers
+
 	if (glewInit() != GLEW_OK)
 	{
 		LOG_CRITICAL("Failed to initialize GLEW");
 		return -1;
 	}    
 
-	// Define the viewport dimensions
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);  
 	GLCall(glViewport(0, -height, width, 2 * height));
+
+	// imgui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-
 	ImGui::StyleColorsDark();
-
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
@@ -79,8 +64,6 @@ int main()
 
 	BasicDataController dataCtrl;
 	dataCtrl.Generate(size, 500);
-	dataCtrl.Generate(size, 500);
-	dataCtrl.Shuffle();
 
 	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
 	dataRndr->SetData(&dataCtrl.GetData());
@@ -90,13 +73,11 @@ int main()
 
 	SortsController.AddSort(std::make_shared<BubbleSort>(dataCtrl.GetData(), dataRndr));
 
-	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
-		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
+
 		dataRndr->Clear();
-		//sortProgram.Render(renderer);
 		dataRndr->Draw();
 
 		ImGui_ImplOpenGL3_NewFrame();
@@ -138,14 +119,12 @@ int main()
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		// Swap the screen buffers
 		glfwSwapBuffers(window);
 	}
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 
-	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
 	return 0;
 }

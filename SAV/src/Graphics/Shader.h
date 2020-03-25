@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <iostream>
 #include <unordered_map>
 
 struct ShaderProgram {

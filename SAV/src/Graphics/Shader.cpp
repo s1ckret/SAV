@@ -6,7 +6,6 @@
 Shader::Shader() :
 	m_FilePath(""),
 	m_RendererID(0)
-
 {
 }
 

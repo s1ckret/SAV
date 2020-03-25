@@ -1,10 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <cassert>
 
 #include "Renderer.h"
-#include "Log.h"
 
 struct VertexBufferElement
 {
@@ -51,7 +49,6 @@ public:
 	template<typename T>
 	void Push(unsigned int count)
 	{
-		LOG_WARN("Push templlate.");
 		Push(count, VBLIdentety<T>());
 	}
 
@@ -65,21 +62,18 @@ private:
 private:
 	void Push(unsigned int count, VBLIdentety<float>)
 	{
-		LOG_TRACE("Push float");
 		m_Elements.push_back({ GL_FLOAT, count, GL_FALSE });
 		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_FLOAT);
 	}
 
 	void Push(unsigned int count, VBLIdentety<unsigned int>)
 	{
-		LOG_TRACE("Push u int");
 		m_Elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
 		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_UNSIGNED_INT);
 	}
 
 	void Push(unsigned int count, VBLIdentety<unsigned char>)
 	{
-		LOG_TRACE("Push u char");
 		m_Elements.push_back({ GL_UNSIGNED_BYTE, count, GL_TRUE });
 		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_UNSIGNED_BYTE);
 	}

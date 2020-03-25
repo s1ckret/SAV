@@ -42,7 +42,6 @@ void Column::Swap(Column & rhs) {
     // mutex.unlock
 }
 
-// Returns !copy! of m_data
 int Column::Data() const {
     return m_data;
 }
