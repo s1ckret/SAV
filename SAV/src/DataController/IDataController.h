@@ -11,10 +11,9 @@ public:
 
     Array & GetData() { return m_array; }
 
-    virtual void Generate(unsigned int size, unsigned int max_value) = 0;
+    virtual void Generate(unsigned int size, unsigned int max_value);
 
-    virtual void Shuffle() = 0;
+    virtual void Shuffle();
 protected:
     Array m_array;
-
 };
