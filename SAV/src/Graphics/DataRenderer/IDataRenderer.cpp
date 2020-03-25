@@ -17,12 +17,6 @@ IDataRenderer::IDataRenderer()
 void IDataRenderer::SetData(Array * data) {
     m_array = data;
 
-    std::vector<unsigned int>().swap(m_default_color);
-    m_default_color.resize(m_array->Size());
-    for (auto it = m_default_color.begin(); it != m_default_color.end(); it++) {
-        *it = 0xffffff;
-    }
-
     auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
     m_max_value = max_value_it->Data();
 
@@ -76,19 +70,6 @@ void IDataRenderer::RemoveIterator(std::string name) {
     }
 }
 
-void IDataRenderer::SetDefaultColor(unsigned int index, unsigned int color) {
-    m_default_color[index] = color;
-}
-
-void IDataRenderer::SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color) {
-    // TODO: Debug flag
-    assert(lhs_index < rhs_index);
-
-    for (unsigned int i = lhs_index; i < rhs_index + 1; i++) {
-        SetDefaultColor(i, color);
-    }
-}
-
 void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
     (*m_array)[index] = ToRGB(color);
 }
@@ -100,11 +81,6 @@ void IDataRenderer::MarkColorArea(unsigned int lhs_index, unsigned int rhs_index
     for (unsigned int i = lhs_index; i < rhs_index + 1; i++) {
         MarkColor(i, color);
     }    
-}
-
-void IDataRenderer::MarkDefaultColor(unsigned int index, unsigned int color) {
-    MarkColor(index, color);
-    SetDefaultColor(index, color);
 }
 
 void IDataRenderer::Draw() {

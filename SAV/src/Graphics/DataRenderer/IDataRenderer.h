@@ -24,7 +24,6 @@ public:
 	IDataRenderer();
     virtual ~IDataRenderer() = default;
 
-    // Data const ???
     void SetData(Array * data);
 
     // Set delay in ms.
@@ -34,25 +33,17 @@ public:
 
     void RemoveIterator(std::string name);
 
-    void SetDefaultColor(unsigned int index, unsigned int color);
-
-    void SetDefaultColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
-
-    // Just mark color
     void MarkColor(unsigned int index, unsigned int color);
 
     void MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color);
-    
-    void MarkDefaultColor(unsigned int index, unsigned int color);
-
+  
     virtual void Draw();
     
 protected:
     void SleepFor(unsigned int ms);
 protected:
     Array * m_array;
-    std::vector<unsigned int> m_default_color;
-    // Key = name, value = index
+
     struct ColumnInfo {
         unsigned int index;
         unsigned int color;
