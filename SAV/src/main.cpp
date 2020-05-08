@@ -16,6 +16,7 @@
 #include "SortsController/SortsController.h"
 
 #include "Sorts/BubbleSort.h"
+#include "Sorts/CountingSort.h"
 
 int main()
 {
@@ -40,7 +41,6 @@ int main()
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
@@ -71,7 +71,8 @@ int main()
 
 	SortsController& SortsController = SortsController::Get();
 
-	SortsController.AddSort(std::make_shared<BubbleSort>(dataCtrl.GetData(), dataRndr));
+	SortsController.AddSort( std::make_shared<BubbleSort>( dataCtrl.GetData( ), dataRndr ) );
+	SortsController.AddSort( std::make_shared<CountingSort>( dataCtrl.GetData( ), dataRndr ) );
 
 	while (!glfwWindowShouldClose(window))
 	{
