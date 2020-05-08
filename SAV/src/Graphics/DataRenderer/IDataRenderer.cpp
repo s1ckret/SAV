@@ -55,6 +55,7 @@ void IDataRenderer::RenderIterator(std::string name, unsigned int index, unsigne
 void IDataRenderer::RemoveIterator(std::string name) {
     auto it = m_iterator_color.find(name);
     if (it != m_iterator_color.end()) {
+        MarkColor( it->second.index, it->second.color );
         m_iterator_color.erase(it);
         LOG_TRACE("Iterator has erased !");
     }
