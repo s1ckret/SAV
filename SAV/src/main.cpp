@@ -32,7 +32,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);    
+	window = glfwCreateWindow(WIDTH, HEIGHT, "SAV", nullptr, nullptr);    
 	if (window == nullptr)
 	{
 		LOG_CRITICAL("Failed to create GLFW window");

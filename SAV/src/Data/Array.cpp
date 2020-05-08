@@ -4,7 +4,7 @@
 
 void Array::Resize(size_t size) {
     m_size = size;
-    std::shared_ptr<Column> new_array(new Column[m_size], [](auto ptr) {
+    std::shared_ptr<Column> new_array(new Column[m_size], [](Column * ptr) {
         LOG_INFO("Delete[] from lamda");
         delete[] ptr;
     });

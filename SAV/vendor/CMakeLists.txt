@@ -1,14 +1,20 @@
 cmake_minimum_required(VERSION 3.12)
 
 add_subdirectory(GLEW/)
-add_subdirectory(GLFW/)
-add_subdirectory(GLM/)
-add_subdirectory(spdlog/)
+include_directories(GLEW/include)
 
-project(imgui)
+add_subdirectory(GLFW/)
+include_directories(GLFW/include)
+
+add_subdirectory(GLM/)
+include_directories(GLW/)
+
+add_subdirectory(spdlog/)
+include_directories(spdlog/include)
 
 include_directories(imgui/)
-include_directories(GLFW/include/)
+
+project(imgui)
 
 file(GLOB IMGUI_SOURCES 
         imgui/*.cpp
