@@ -17,6 +17,7 @@
 
 #include "Sorts/BubbleSort.h"
 #include "Sorts/CountingSort.h"
+#include "Sorts/QuickLSort.h"
 
 int main()
 {
@@ -41,6 +42,7 @@ int main()
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval( 1 );
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
