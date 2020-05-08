@@ -13,6 +13,7 @@ public:
 
     Column & operator[](size_t index);
     size_t Size() const;
+    int GetMaxValue( ) const;
 
     Column * Begin() const;
     Column * End() const;

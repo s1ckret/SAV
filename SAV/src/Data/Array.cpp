@@ -19,6 +19,16 @@ size_t Array::Size() const {
     return m_size;
 }
 
+int Array::GetMaxValue( ) const {
+    int max = m_array.get()[0].Data();
+    for ( auto it = Begin( ); it != End( ); it++ ) {
+        if ( it->Data( ) > max ) {
+            max = it->Data( );
+        }
+    }
+    return max;
+}
+
 Column * Array::Begin() const {
     Column * beginColumn = nullptr;
     if (m_size) {
