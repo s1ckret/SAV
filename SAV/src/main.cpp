@@ -75,6 +75,7 @@ int main()
 
 	SortsController.AddSort( std::make_shared<BubbleSort>( dataCtrl.GetData( ), dataRndr ) );
 	SortsController.AddSort( std::make_shared<CountingSort>( dataCtrl.GetData( ), dataRndr ) );
+	SortsController.AddSort( std::make_shared<QuickLSort>( dataCtrl.GetData( ), dataRndr ) );
 
 	while (!glfwWindowShouldClose(window))
 	{
