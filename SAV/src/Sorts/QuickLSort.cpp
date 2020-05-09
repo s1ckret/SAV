@@ -14,6 +14,7 @@ void QuickLSort::Begin()
 {
 	dirtyFlag = 0;
 	QuickLSortBegin(0, m_array.Size() - 1);
+	m_dataRenderer->DisplaySorted( );
 	LOG_INFO("I am sorted !");
 	dirtyFlag = 1;
 }

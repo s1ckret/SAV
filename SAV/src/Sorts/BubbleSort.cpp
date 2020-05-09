@@ -34,5 +34,6 @@ void BubbleSort::Begin()
 	m_dataRenderer->MarkColor(m_array.Size() - 1, 0x00ff00);
 
 	LOG_INFO("I am sorted !");
+	m_dataRenderer->DisplaySorted( );
 	dirtyFlag = 1;
 }

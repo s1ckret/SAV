@@ -59,6 +59,7 @@ void CountingSort::Begin()
 	
 	free( sorted_array );
 	free( count_array );
+	m_dataRenderer->DisplaySorted( );
 	LOG_INFO("I am sorted !");
 	dirtyFlag = 1;
 }

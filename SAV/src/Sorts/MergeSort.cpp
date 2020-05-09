@@ -14,6 +14,7 @@ void MergeSort::Begin()
 {
 	dirtyFlag = 0;
 	MergeSortBegin(0, m_array.Size() - 1);
+	m_dataRenderer->DisplaySorted( );
 	LOG_INFO("I am sorted !");
 	dirtyFlag = 1;
 }

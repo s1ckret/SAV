@@ -72,7 +72,8 @@ int main()
 
 	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
 	dataRndr->SetData(&dataCtrl.GetData());
-	dataRndr->SetDelay(3);
+	int delay = 3;
+	dataRndr->SetDelay(delay);
 
 	SortsController& SortsController = SortsController::Get();
 
@@ -104,6 +105,16 @@ int main()
 			{
 				LOG_INFO("Sort started!");
 				SortsController.BeginSort();
+			}
+
+			ImGui::Text( "Delay:      " ); ImGui::SameLine( );
+			ImGui::PushItemWidth( 100 );
+			ImGui::InputInt( "  ", &delay );
+			ImGui::PopItemWidth( );
+			ImGui::SameLine( );
+			if ( ImGui::Button( "Set" ) && dirtyFlag ) {
+				dataRndr->SetDelay( delay );
+				LOG_INFO( "New Delay has set!" );
 			}
 
 			ImGui::Text( "Array size: " ); ImGui::SameLine( );

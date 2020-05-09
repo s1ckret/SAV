@@ -88,6 +88,13 @@ void IDataRenderer::Reset() {
     MarkColorArea(0, m_array->Size(), 0xffffff);
 }
 
+void IDataRenderer::DisplaySorted( ) {
+    for ( unsigned int i = 0; i < m_array->Size( ); i++ ) {
+        MarkColor( i, 0x00ff00 );
+        SleepFor( m_delay );
+    }
+}
+
 void IDataRenderer::SleepFor(unsigned int ms) {
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 }
