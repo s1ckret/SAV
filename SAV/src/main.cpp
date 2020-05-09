@@ -20,6 +20,8 @@
 #include "Sorts/QuickLSort.h"
 #include "Sorts/MergeSort.h"
 
+bool dirtyFlag = 1;
+
 int main()
 {
 	const GLuint WIDTH = 1200, HEIGHT = 800;
@@ -93,13 +95,13 @@ int main()
 			static int sortChooser = -1;
 			ImGui::Begin("Control panel");                          
 
-			if (ImGui::Button("Shuffle Massive"))
+			if (ImGui::Button("Shuffle Massive") && dirtyFlag)
 			{
 				dataRndr->Reset();
 				dataCtrl.Shuffle();
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("Sort"))
+			if (ImGui::Button("Sort") && dirtyFlag )
 			{
 				LOG_INFO("Sort started!");
 				SortsController.BeginSort();
@@ -110,7 +112,7 @@ int main()
 				const auto& collection = SortsController.GetSortCollection();
 				for (unsigned int i = 0; i < collection.size(); i++)
 				{
-					if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i))
+					if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i) && dirtyFlag )
 					{
 						SortsController.SetSort(collection[i]);
 						LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());

@@ -2,6 +2,7 @@
 
 #include "Log.h"
 
+extern bool dirtyFlag;
 
 CountingSort::CountingSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednderer )
 	: ISort( array, dataRednderer ) {
@@ -11,6 +12,7 @@ CountingSort::CountingSort( Array &array, std::shared_ptr<IDataRenderer> &dataRe
 
 void CountingSort::Begin()
 {
+	dirtyFlag = 0;
 	int max = m_array.GetMaxValue( );
 	unsigned size = m_array.Size( );
 	LOG_TRACE( "Max value: {0}", max );
@@ -58,5 +60,6 @@ void CountingSort::Begin()
 	free( sorted_array );
 	free( count_array );
 	LOG_INFO("I am sorted !");
+	dirtyFlag = 1;
 }
 

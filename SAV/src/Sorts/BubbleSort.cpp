@@ -2,6 +2,8 @@
 
 #include "Log.h"
 
+extern bool dirtyFlag;
+
 BubbleSort::BubbleSort(Array & array, std::shared_ptr<IDataRenderer> & dataRednderer) 
     : ISort(array, dataRednderer)
 {
@@ -15,6 +17,7 @@ BubbleSort::~BubbleSort() {
 
 void BubbleSort::Begin()
 {
+	dirtyFlag = 0;
 	for (unsigned int i = 0; i < m_array.Size(); i++)
 	{
 		m_dataRenderer->RenderIterator("i", i, 0xff0fff);
@@ -31,4 +34,5 @@ void BubbleSort::Begin()
 	m_dataRenderer->MarkColor(m_array.Size() - 1, 0x00ff00);
 
 	LOG_INFO("I am sorted !");
+	dirtyFlag = 1;
 }

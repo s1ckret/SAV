@@ -2,6 +2,8 @@
 
 #include "Log.h"
 
+extern bool dirtyFlag;
+
 QuickLSort::QuickLSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednderer )
 	: ISort( array, dataRednderer ) {
 	m_name = "QuickLSort";
@@ -10,8 +12,10 @@ QuickLSort::QuickLSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednde
 
 void QuickLSort::Begin()
 {
+	dirtyFlag = 0;
 	QuickLSortBegin(0, m_array.Size() - 1);
 	LOG_INFO("I am sorted !");
+	dirtyFlag = 1;
 }
 
 void QuickLSort::QuickLSortBegin(int left, int right)

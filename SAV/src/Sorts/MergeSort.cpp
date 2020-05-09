@@ -2,6 +2,8 @@
 
 #include "Log.h"
 
+extern bool dirtyFlag;
+
 MergeSort::MergeSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednderer )
 	: ISort( array, dataRednderer ) {
 	m_name = "Merge Sort";
@@ -10,8 +12,10 @@ MergeSort::MergeSort( Array &array, std::shared_ptr<IDataRenderer> &dataRedndere
 
 void MergeSort::Begin()
 {
+	dirtyFlag = 0;
 	MergeSortBegin(0, m_array.Size() - 1);
 	LOG_INFO("I am sorted !");
+	dirtyFlag = 1;
 }
 
 void MergeSort::MergeSortBegin(unsigned int left, unsigned int right)
