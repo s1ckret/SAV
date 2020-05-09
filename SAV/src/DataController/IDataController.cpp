@@ -12,11 +12,7 @@ void IDataController::Generate(unsigned int size, unsigned int max_value) {
 } 
 
 void IDataController::Shuffle() {
-	for ( unsigned int i = 0; i < m_array.Size(); i++ ) {
-		unsigned int randomIndex = rand( ) % m_array.Size( );
-		int temp = m_array[i].Data();
-		m_array[i] = m_array[randomIndex].Data();
-		m_array[randomIndex] = temp;
-
-	}
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(m_array.Begin(), m_array.End(), generator);
 }
