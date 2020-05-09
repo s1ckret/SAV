@@ -18,6 +18,7 @@
 #include "Sorts/BubbleSort.h"
 #include "Sorts/CountingSort.h"
 #include "Sorts/QuickLSort.h"
+#include "Sorts/MergeSort.h"
 
 int main()
 {
@@ -76,6 +77,7 @@ int main()
 	SortsController.AddSort( std::make_shared<BubbleSort>( dataCtrl.GetData( ), dataRndr ) );
 	SortsController.AddSort( std::make_shared<CountingSort>( dataCtrl.GetData( ), dataRndr ) );
 	SortsController.AddSort( std::make_shared<QuickLSort>( dataCtrl.GetData( ), dataRndr ) );
+	SortsController.AddSort( std::make_shared<MergeSort>( dataCtrl.GetData( ), dataRndr ) );
 
 	while (!glfwWindowShouldClose(window))
 	{
