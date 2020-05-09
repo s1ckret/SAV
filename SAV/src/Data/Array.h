@@ -6,7 +6,7 @@
 
 class Array {
 public:
-    Array() = default;
+    Array();
     ~Array() = default;
 
     void Resize(size_t size);

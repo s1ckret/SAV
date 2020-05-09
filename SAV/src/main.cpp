@@ -65,7 +65,7 @@ int main()
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	const unsigned int size = 100;
+	int size = 100;
 
 	BasicDataController dataCtrl;
 	dataCtrl.Generate(size, 500);
@@ -100,27 +100,34 @@ int main()
 				dataRndr->Reset();
 				dataCtrl.Shuffle();
 			}
-			ImGui::SameLine();
 			if (ImGui::Button("Sort") && dirtyFlag )
 			{
 				LOG_INFO("Sort started!");
 				SortsController.BeginSort();
 			}
 
-			if (ImGui::TreeNode("Select sort algorithm:"))
-			{
-				const auto& collection = SortsController.GetSortCollection();
-				for (unsigned int i = 0; i < collection.size(); i++)
-				{
-					if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i) && dirtyFlag )
-					{
-						SortsController.SetSort(collection[i]);
-						LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
-						break;
-					}
-				}
-				ImGui::TreePop();
+			ImGui::Text( "Array size: " ); ImGui::SameLine( );
+			ImGui::PushItemWidth( 100 );
+			ImGui::InputInt( "", &size );
+			ImGui::PopItemWidth( );
+			ImGui::SameLine( );
+			if ( ImGui::Button( "Generate" ) && dirtyFlag ) {
+				dataCtrl.Generate( size, 10 );
+				dataRndr->SetData( &dataCtrl.GetData( ) );
+				LOG_INFO( "New Array has generated!" );
 			}
+
+			const auto& collection = SortsController.GetSortCollection();
+			for (unsigned int i = 0; i < collection.size(); i++)
+			{
+				if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i) && dirtyFlag )
+				{
+					SortsController.SetSort(collection[i]);
+					LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
+					break;
+				}
+			}
+			
 
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			ImGui::End();

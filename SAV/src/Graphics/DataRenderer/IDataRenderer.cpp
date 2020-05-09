@@ -12,7 +12,8 @@ void IDataRenderer::SetData(Array * data) {
 
     auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
     m_max_value = max_value_it->Data();
-
+    m_vbl.Clear( );
+    
     // Position
     m_vbl.Push<float>(1);
     // Color
