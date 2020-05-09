@@ -16,6 +16,11 @@
 #include "SortsController/SortsController.h"
 
 #include "Sorts/BubbleSort.h"
+#include "Sorts/CountingSort.h"
+#include "Sorts/QuickLSort.h"
+#include "Sorts/MergeSort.h"
+
+bool dirtyFlag = 1;
 
 int main()
 {
@@ -40,7 +45,7 @@ int main()
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-
+	glfwSwapInterval( 1 );
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
@@ -60,18 +65,22 @@ int main()
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	const unsigned int size = 100;
+	int size = 100;
 
 	BasicDataController dataCtrl;
 	dataCtrl.Generate(size, 500);
 
 	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
 	dataRndr->SetData(&dataCtrl.GetData());
-	dataRndr->SetDelay(3);
+	int delay = 3;
+	dataRndr->SetDelay(delay);
 
 	SortsController& SortsController = SortsController::Get();
 
-	SortsController.AddSort(std::make_shared<BubbleSort>(dataCtrl.GetData(), dataRndr));
+	SortsController.AddSort( std::make_shared<BubbleSort>( dataCtrl.GetData( ), dataRndr ) );
+	SortsController.AddSort( std::make_shared<CountingSort>( dataCtrl.GetData( ), dataRndr ) );
+	SortsController.AddSort( std::make_shared<QuickLSort>( dataCtrl.GetData( ), dataRndr ) );
+	SortsController.AddSort( std::make_shared<MergeSort>( dataCtrl.GetData( ), dataRndr ) );
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -87,32 +96,49 @@ int main()
 			static int sortChooser = -1;
 			ImGui::Begin("Control panel");                          
 
-			if (ImGui::Button("Shuffle Massive"))
+			if (ImGui::Button("Shuffle Massive") && dirtyFlag)
 			{
 				dataRndr->Reset();
 				dataCtrl.Shuffle();
 			}
-			ImGui::SameLine();
-			if (ImGui::Button("Sort"))
+			if (ImGui::Button("Sort") && dirtyFlag )
 			{
 				LOG_INFO("Sort started!");
 				SortsController.BeginSort();
 			}
 
-			if (ImGui::TreeNode("Select sort algorithm:"))
-			{
-				const auto& collection = SortsController.GetSortCollection();
-				for (unsigned int i = 0; i < collection.size(); i++)
-				{
-					if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i))
-					{
-						SortsController.SetSort(collection[i]);
-						LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
-						break;
-					}
-				}
-				ImGui::TreePop();
+			ImGui::Text( "Delay:      " ); ImGui::SameLine( );
+			ImGui::PushItemWidth( 100 );
+			ImGui::InputInt( "  ", &delay );
+			ImGui::PopItemWidth( );
+			ImGui::SameLine( );
+			if ( ImGui::Button( "Set" ) && dirtyFlag ) {
+				dataRndr->SetDelay( delay );
+				LOG_INFO( "New Delay has set!" );
 			}
+
+			ImGui::Text( "Array size: " ); ImGui::SameLine( );
+			ImGui::PushItemWidth( 100 );
+			ImGui::InputInt( "", &size );
+			ImGui::PopItemWidth( );
+			ImGui::SameLine( );
+			if ( ImGui::Button( "Generate" ) && dirtyFlag ) {
+				dataCtrl.Generate( size, 10 );
+				dataRndr->SetData( &dataCtrl.GetData( ) );
+				LOG_INFO( "New Array has generated!" );
+			}
+
+			const auto& collection = SortsController.GetSortCollection();
+			for (unsigned int i = 0; i < collection.size(); i++)
+			{
+				if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i) && dirtyFlag )
+				{
+					SortsController.SetSort(collection[i]);
+					LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
+					break;
+				}
+			}
+			
 
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			ImGui::End();

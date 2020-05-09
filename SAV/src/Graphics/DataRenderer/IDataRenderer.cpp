@@ -12,7 +12,8 @@ void IDataRenderer::SetData(Array * data) {
 
     auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
     m_max_value = max_value_it->Data();
-
+    m_vbl.Clear( );
+    
     // Position
     m_vbl.Push<float>(1);
     // Color
@@ -55,6 +56,7 @@ void IDataRenderer::RenderIterator(std::string name, unsigned int index, unsigne
 void IDataRenderer::RemoveIterator(std::string name) {
     auto it = m_iterator_color.find(name);
     if (it != m_iterator_color.end()) {
+        MarkColor( it->second.index, it->second.color );
         m_iterator_color.erase(it);
         LOG_TRACE("Iterator has erased !");
     }
@@ -84,6 +86,13 @@ void IDataRenderer::Draw() {
 void IDataRenderer::Reset() {
     m_iterator_color.clear();
     MarkColorArea(0, m_array->Size(), 0xffffff);
+}
+
+void IDataRenderer::DisplaySorted( ) {
+    for ( unsigned int i = 0; i < m_array->Size( ); i++ ) {
+        MarkColor( i, 0x00ff00 );
+        SleepFor( m_delay );
+    }
 }
 
 void IDataRenderer::SleepFor(unsigned int ms) {

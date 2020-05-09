@@ -36,6 +36,8 @@ public:
     virtual void Draw();
 
     virtual void Reset();
+
+    virtual void DisplaySorted( );
     
 protected:
     void SleepFor(unsigned int ms);

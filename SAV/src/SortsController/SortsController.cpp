@@ -27,6 +27,7 @@ void SortsController::BeginSort() {
     else {
         LOG_WARN("Weak pointer is expired!");
     }
+    
 }
 
 const std::vector<std::shared_ptr<ISort>>& SortsController::GetSortCollection() const {

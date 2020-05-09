@@ -2,6 +2,10 @@
 
 #include "Log.h"
 
+Array::Array( )
+    : m_size(0)
+{ }
+
 void Array::Resize(size_t size) {
     m_size = size;
     std::shared_ptr<Column> new_array(new Column[m_size], [](Column * ptr) {
@@ -17,6 +21,16 @@ Column & Array::operator[](size_t index) {
 
 size_t Array::Size() const {
     return m_size;
+}
+
+int Array::GetMaxValue( ) const {
+    int max = m_array.get()[0].Data();
+    for ( auto it = Begin( ); it != End( ); it++ ) {
+        if ( it->Data( ) > max ) {
+            max = it->Data( );
+        }
+    }
+    return max;
 }
 
 Column * Array::Begin() const {
