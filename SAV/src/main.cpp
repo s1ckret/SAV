@@ -93,53 +93,46 @@ int main()
 		ImGui::NewFrame();
 		{
 			static int sortChooser = -1;
-			ImGui::Begin("Control panel");                          
-
-			if (ImGui::Button("Shuffle Massive") && dirtyFlag)
-			{
-				dataRndr->Reset();
-				dataCtrl.Shuffle();
-			}
-			if (ImGui::Button("Sort") && dirtyFlag )
-			{
-				LOG_INFO("Sort started!");
-				SortsController.BeginSort();
-			}
+			ImGui::Begin("SAV Control panel");                          
 
 			ImGui::Text( "Delay:      " ); ImGui::SameLine( );
 			ImGui::PushItemWidth( 100 );
-			ImGui::InputInt( "  ", &delay );
+                        if (ImGui::InputInt("  ", &delay)) {
+                          dataRndr->SetDelay(delay);
+                          LOG_INFO("New Delay has set!");
+                        }
 			ImGui::PopItemWidth( );
-			ImGui::SameLine( );
-			if ( ImGui::Button( "Set" ) && dirtyFlag ) {
-				dataRndr->SetDelay( delay );
-				LOG_INFO( "New Delay has set!" );
-			}
 
 			ImGui::Text( "Array size: " ); ImGui::SameLine( );
 			ImGui::PushItemWidth( 100 );
 			ImGui::InputInt( "", &size );
 			ImGui::PopItemWidth( );
-			ImGui::SameLine( );
-			if ( ImGui::Button( "Generate" ) && dirtyFlag ) {
+			if ( ImGui::Button( "Generate", {96, 25} ) && dirtyFlag ) {
 				dataCtrl.Generate( size );
 				dataRndr->SetData( &dataCtrl.GetData( ) );
 				LOG_INFO( "New Array has generated!" );
 			}
+			ImGui::SameLine( );
+            if (ImGui::Button("Shuffle", {96, 25}) && dirtyFlag) {
+                dataRndr->Reset();
+                dataCtrl.Shuffle();
+            }
 
+			ImGui::NewLine();
 			const auto& collection = SortsController.GetSortCollection();
 			for (unsigned int i = 0; i < collection.size(); i++)
 			{
-				if (ImGui::RadioButton(collection[i]->GetName().c_str(), &sortChooser, i) && dirtyFlag )
-				{
-					SortsController.SetSort(collection[i]);
-					LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
-					break;
+				std::string btn_name = collection[i]->GetName().insert(0, "Begin ");
+                if (ImGui::Button(btn_name.c_str(), {200, 25}) && dirtyFlag) {
+				    SortsController.SetSort(collection[i]);
+				    LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
+					SortsController.BeginSort();
+					LOG_INFO("{0} has started!", collection[i]->GetName().c_str());
 				}
 			}
 			
 
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			ImGui::End();
 		}
 		ImGui::Render();
