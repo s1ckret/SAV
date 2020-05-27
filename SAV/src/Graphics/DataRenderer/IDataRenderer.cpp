@@ -7,25 +7,24 @@
 #include "glm/glm.hpp"
 #include "Utility.h"
 
-void IDataRenderer::SetData(Array * data) {
-    m_array = data;
+IDataRenderer::IDataRenderer(Array* data, unsigned int delay_ms)
+    : m_array(data)
+    , m_delay(delay_ms) {
+  Init();
+}
 
-    auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
-    m_max_value = max_value_it->Data();
-    m_vbl.Clear( );
-    
-    // Position
-    m_vbl.Push<float>(1);
-    // Color
-    m_vbl.Push<float>(3);
-    
-	m_vb.SetData(m_array->Begin(), m_array->Size() * sizeof(Column));
-	m_va.AddBuffer(m_vb, m_vbl);
+void IDataRenderer::SetData(Array* data) {
+  m_array = data;
+  m_vb.ClearData();
+  m_vb.SetData(m_array->Begin(), m_array->Size() * sizeof(Column));
+  m_va.AddBuffer(m_vb, m_vbl);
 
-	m_shader.SetFilePath("res/shaders/New.shader");
-	m_shader.Bind();
-	m_shader.setUniform1ui("u_arr_size", m_array->Size());
-	m_shader.setUniform1ui("u_arr_max_value", m_max_value);
+  auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
+  m_max_value = max_value_it->Data();
+
+  m_shader.Bind();
+  m_shader.setUniform1ui("u_arr_size", m_array->Size());
+  m_shader.setUniform1ui("u_arr_max_value", m_max_value);
 }
 
 void IDataRenderer::SetDelay(unsigned int ms) {
@@ -97,4 +96,23 @@ void IDataRenderer::DisplaySorted( ) {
 
 void IDataRenderer::SleepFor(unsigned int ms) {
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
+
+void IDataRenderer::Init() {
+  auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
+  m_max_value = max_value_it->Data();
+
+  m_vbl.Clear();
+  // Position
+  m_vbl.Push<float>(1);
+  // Color
+  m_vbl.Push<float>(3);
+
+  m_vb.SetData(m_array->Begin(), m_array->Size() * sizeof(Column));
+  m_va.AddBuffer(m_vb, m_vbl);
+
+  m_shader.SetFilePath("res/shaders/New.shader");
+  m_shader.Bind();
+  m_shader.setUniform1ui("u_arr_size", m_array->Size());
+  m_shader.setUniform1ui("u_arr_max_value", m_max_value);
 }

@@ -70,10 +70,9 @@ int main()
 	BasicDataController dataCtrl;
 	dataCtrl.Generate(size, 500);
 
-	std::shared_ptr<IDataRenderer> dataRndr = std::make_shared<BasicDataRenderer>();
-	dataRndr->SetData(&dataCtrl.GetData());
 	int delay = 3;
-	dataRndr->SetDelay(delay);
+	std::shared_ptr<IDataRenderer> dataRndr =
+            std::make_shared<BasicDataRenderer>(&dataCtrl.GetData(), delay);
 
 	SortsController& SortsController = SortsController::Get();
 
