@@ -68,7 +68,7 @@ int main()
 	int size = 100;
 
 	BasicDataController dataCtrl;
-	dataCtrl.Generate(size, 500);
+	dataCtrl.Generate(size);
 
 	int delay = 3;
 	std::shared_ptr<IDataRenderer> dataRndr =
@@ -122,7 +122,7 @@ int main()
 			ImGui::PopItemWidth( );
 			ImGui::SameLine( );
 			if ( ImGui::Button( "Generate" ) && dirtyFlag ) {
-				dataCtrl.Generate( size, 10 );
+				dataCtrl.Generate( size );
 				dataRndr->SetData( &dataCtrl.GetData( ) );
 				LOG_INFO( "New Array has generated!" );
 			}

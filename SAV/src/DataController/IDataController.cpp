@@ -3,7 +3,7 @@
 #include <random>
 #include <algorithm>
 
-void IDataController::Generate(unsigned int size, unsigned int max_value) {
+void IDataController::Generate(unsigned int size) {
     m_array.Resize(size);
 
     for (unsigned int i = 0; i < m_array.Size(); i++) {
