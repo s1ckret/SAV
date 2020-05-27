@@ -83,7 +83,7 @@ void IDataRenderer::Draw() {
 
 void IDataRenderer::Reset() {
     m_iterator_color.clear();
-    MarkColorArea(0, m_array->Size(), 0xffffff);
+    MarkColorArea(0, m_array->Size() - 1, 0xffffff);
 }
 
 void IDataRenderer::DisplaySorted( ) {
