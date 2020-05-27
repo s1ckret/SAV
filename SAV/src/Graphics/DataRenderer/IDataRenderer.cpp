@@ -16,11 +16,10 @@ IDataRenderer::IDataRenderer(Array* data, unsigned int delay_ms)
 void IDataRenderer::SetData(Array* data) {
   m_array = data;
   m_vb.ClearData();
-  m_vb.SetData(m_array->Begin(), m_array->Size() * sizeof(Column));
+  m_vb.SetData(&*m_array->begin(), m_array->Size() * sizeof(Column));
   m_va.AddBuffer(m_vb, m_vbl);
 
-  auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
-  m_max_value = max_value_it->Data();
+  m_max_value = m_array->GetMaxValue();
 
   m_shader.Bind();
   m_shader.setUniform1ui("u_arr_size", m_array->Size());
@@ -31,25 +30,25 @@ void IDataRenderer::SetDelay(unsigned int ms) {
     m_delay = ms;
 }
 
-void IDataRenderer::RenderIterator(std::string name, unsigned int index, unsigned int color) {
-    auto it = m_iterator_color.find(name);
-    const auto & currentColumn = (*m_array)[index];
-    if (it != m_iterator_color.end()) {
-        // Restore previous color
-        MarkColor(it->second.index, it->second.color);
-        // Save current color and position
-        it->second.color = ToHex(currentColumn.GetColor());
-        it->second.index = index;
-        // Mark with new color
-        MarkColor(index, color);
-    }
-    else {
-        // Save current color and position
-        m_iterator_color.emplace(name, ColumnInfo{index, ToHex(currentColumn.GetColor())});
-        // Mark with new color
-        MarkColor(index, color);    
-    }
-    SleepFor(m_delay);
+void IDataRenderer::RenderIterator(std::string name, unsigned int index,
+                                   unsigned int color) {
+  auto it = m_iterator_color.find(name);
+  if (it != m_iterator_color.end()) {
+    // Restore previous color
+    MarkColor(it->second.index, it->second.color);
+    // Save current color and position
+    it->second.color = ToHex(GetColor(m_array, index));
+    it->second.index = index;
+    // Mark with new color
+    MarkColor(index, color);
+  } else {
+    // Save current color and position
+    m_iterator_color.emplace(
+        name, ColumnInfo{index, ToHex(GetColor(m_array, index))});
+    // Mark with new color
+    MarkColor(index, color);
+  }
+  SleepFor(m_delay);
 }
 
 void IDataRenderer::RemoveIterator(std::string name) {
@@ -65,7 +64,7 @@ void IDataRenderer::RemoveIterator(std::string name) {
 }
 
 void IDataRenderer::MarkColor(unsigned int index, unsigned int color) {
-    (*m_array)[index] = ToRGB(color);
+  SetColor(m_array, index, color);
 }
 
 void IDataRenderer::MarkColorArea(unsigned int lhs_index, unsigned int rhs_index, unsigned int color) {
@@ -78,7 +77,7 @@ void IDataRenderer::MarkColorArea(unsigned int lhs_index, unsigned int rhs_index
 }
 
 void IDataRenderer::Draw() {
-	m_vb.UpdateData(m_array->Begin(), m_array->Size() * sizeof(Column));
+	m_vb.UpdateData(&*m_array->begin(), m_array->Size() * sizeof(Column));
     Renderer::Draw(m_va, m_shader, m_array->Size());
 }
 
@@ -99,8 +98,7 @@ void IDataRenderer::SleepFor(unsigned int ms) {
 }
 
 void IDataRenderer::Init() {
-  auto max_value_it = std::max_element(m_array->Begin(), m_array->End());
-  m_max_value = max_value_it->Data();
+  m_max_value = m_array->GetMaxValue();
 
   m_vbl.Clear();
   // Position
@@ -108,7 +106,7 @@ void IDataRenderer::Init() {
   // Color
   m_vbl.Push<float>(3);
 
-  m_vb.SetData(m_array->Begin(), m_array->Size() * sizeof(Column));
+  m_vb.SetData(&*m_array->begin(), m_array->Size() * sizeof(Column));
   m_va.AddBuffer(m_vb, m_vbl);
 
   m_shader.SetFilePath("res/shaders/New.shader");

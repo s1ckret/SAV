@@ -14,5 +14,5 @@ void IDataController::Generate(unsigned int size) {
 void IDataController::Shuffle() {
     std::random_device rd;
     std::mt19937 generator(rd());
-    std::shuffle(m_array.Begin(), m_array.End(), generator);
+    std::shuffle(m_array.begin().GetElem(), m_array.end().GetElem(), generator);
 }

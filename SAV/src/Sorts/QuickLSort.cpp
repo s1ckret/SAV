@@ -34,21 +34,21 @@ int QuickLSort::Partition(int left, int right)
 {
 	m_dataRenderer->RenderIterator( "left", left , 0xc0c0c0 );
 	m_dataRenderer->RenderIterator( "right", right, 0x800000 );
-	int pivot = m_array[right].Data();
+	int pivot = m_array[right];
 	int i = left - 1;
 	for (unsigned int j = left; j < right; j++)
 	{
 		m_dataRenderer->RenderIterator( "j", j, 0xFFA07A );
-		if (m_array[j].Data() < pivot)
+		if (m_array[j] < pivot)
 		{
 			i++;
-			m_array[j].Swap( m_array[i] );
+			std::swap(m_array[j], m_array[i]);
 		}
 	}
 	m_dataRenderer->RemoveIterator( "j" );
 
 	i++;
-	m_array[right].Swap( m_array[i] );
+    std::swap(m_array[right], m_array[i]);
 
 	m_dataRenderer->RemoveIterator( "left" );
 	m_dataRenderer->RemoveIterator( "right" );
