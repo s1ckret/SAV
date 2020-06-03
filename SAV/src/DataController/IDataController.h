@@ -9,7 +9,7 @@ public:
 
     inline Array & GetData() { return m_array; }
 
-    virtual void Generate(unsigned int size, unsigned int max_value);
+    virtual void Generate(unsigned int size);
 
     virtual void Shuffle();
 protected:

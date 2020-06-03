@@ -18,7 +18,7 @@
 class IDataRenderer : public Renderer
 {
 public:
-	IDataRenderer() = default;
+  IDataRenderer(Array *data, unsigned int delay_ms);
     virtual ~IDataRenderer() = default;
 
     virtual void SetData(Array * data);
@@ -41,6 +41,8 @@ public:
     
 protected:
     void SleepFor(unsigned int ms);
+    void Init();
+
 protected:
     Array * m_array;
 

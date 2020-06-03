@@ -28,7 +28,7 @@ void CountingSort::Begin()
 	for (unsigned int i = 0; i < size; i++)
 	{
 		m_dataRenderer->RenderIterator( "i", i, 0xff0000 );
-		count_array[m_array[i].Data()]++;
+		count_array[m_array[i]]++;
 	}
 	m_dataRenderer->RemoveIterator( "i" );
 
@@ -42,9 +42,9 @@ void CountingSort::Begin()
 	for (unsigned int i = 0; i < size; i++)
 	{
 		m_dataRenderer->RenderIterator( "i", i, 0x00ff00 );
-		unsigned int index = count_array[m_array[i].Data( )] - 1;
-		--count_array[m_array[i].Data( )];
-		sorted_array[index] = m_array[i].Data( );
+		unsigned int index = count_array[m_array[i]] - 1;
+		--count_array[m_array[i]];
+		sorted_array[index] = m_array[i];
 
 	}
 	m_dataRenderer->RemoveIterator( "i" );

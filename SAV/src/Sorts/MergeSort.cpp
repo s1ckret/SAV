@@ -45,14 +45,14 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 	for (unsigned int i = 0; i < sizeLeft; i++) 
 	{
 		m_dataRenderer->RenderIterator( "i", left + i, 0xff0000 );
-		tempLeft[i] = m_array[left + i].Data();
+		tempLeft[i] = m_array[left + i];
 	}
 	LOG_TRACE( "Copying into right auxillary array..." );
 	// Copy data into Right array
 	for (unsigned int i = 0; i < sizeRight; i++) 
 	{
 		m_dataRenderer->RenderIterator( "i", mid + i + 1, 0x0000ff );
-		tempRight[i] = m_array[mid + i + 1].Data();
+		tempRight[i] = m_array[mid + i + 1];
 	}
 	m_dataRenderer->RemoveIterator( "i" );
 	LOG_TRACE( "Merging..." );

@@ -5,6 +5,7 @@
 class BasicDataRenderer : public IDataRenderer
 {
 public:
-	BasicDataRenderer() = default;
-    ~BasicDataRenderer() = default;
+  BasicDataRenderer(Array *data, unsigned int delay_ms)
+      : IDataRenderer(data, delay_ms) {}
+  ~BasicDataRenderer() = default;
 };
