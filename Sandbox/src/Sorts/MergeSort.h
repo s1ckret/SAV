@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ISort.h"
+#include "SAV.h"
 
 class MergeSort : public ISort
 {

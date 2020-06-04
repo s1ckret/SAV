@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ISort.h"
+#include "SAV.h"
 
 class QuickLSort : public ISort
 {
