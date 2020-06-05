@@ -17,7 +17,6 @@ BubbleSort::~BubbleSort() {
 
 void BubbleSort::Begin()
 {
-    dirtyFlag = 0;
     for (unsigned int i = 0; i < m_array.Size(); i++)
     {
         m_dataRndr->RenderIterator("i", i, 0xff0fff);
@@ -35,5 +34,4 @@ void BubbleSort::Begin()
 
     LOG_INFO("I am sorted !");
     m_dataRndr->DisplaySorted( );
-    dirtyFlag = 1;
 }

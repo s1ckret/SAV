@@ -7,6 +7,8 @@
 #include "glm/glm.hpp"
 #include "Utility.h"
 
+extern bool dirtyFlag;
+
 IDataRenderer::IDataRenderer(Array* data, unsigned int delay_ms)
     : m_array(data)
     , m_delay(delay_ms) {
@@ -91,6 +93,7 @@ void IDataRenderer::DisplaySorted( ) {
         MarkColor( i, 0x00ff00 );
         SleepFor( m_delay );
     }
+    dirtyFlag = 1;
 }
 
 void IDataRenderer::SleepFor(unsigned int ms) {

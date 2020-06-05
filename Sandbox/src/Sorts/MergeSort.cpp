@@ -13,11 +13,9 @@ MergeSort::MergeSort(std::shared_ptr<IDataController> &dataController,
 
 void MergeSort::Begin()
 {
-	dirtyFlag = 0;
 	MergeSortBegin(0, m_array.Size() - 1);
 	m_dataRndr->DisplaySorted( );
 	LOG_INFO("I am sorted !");
-	dirtyFlag = 1;
 }
 
 void MergeSort::MergeSortBegin(unsigned int left, unsigned int right)
