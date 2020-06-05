@@ -29,6 +29,11 @@ void IDataController::Swap(int& lhs, int& rhs) {
   ++m_swap_count;
   std::swap(lhs, rhs);
 }
+
+void IDataController::Assign(int& lhs, const int& rhs) {
+  ++m_assignment_count;
+  lhs = rhs;
+}
  
 
 void IDataController::Shuffle() {
@@ -40,8 +45,11 @@ void IDataController::Shuffle() {
 void IDataController::ResetCounters() {
   m_cmp_count = 0;
   m_swap_count = 0;
+  m_assignment_count = 0;
 }
 
 unsigned IDataController::GetCmpCount() const { return m_cmp_count; }
 
 unsigned IDataController::GetSwapCount() const { return m_swap_count; }
+
+unsigned IDataController::GetAssignmentCount() const { return m_assignment_count; }

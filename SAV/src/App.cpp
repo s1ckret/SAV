@@ -123,6 +123,9 @@ void App::ImguiRenderLayer() {
     ImGui::Text((std::string("Compare count: ") +
                  std::to_string(m_dataCtrl->GetCmpCount()))
                     .c_str());
+    ImGui::Text((std::string("Assignment count: ") +
+                 std::to_string(m_dataCtrl->GetAssignmentCount()))
+                    .c_str());
 
     ImGui::NewLine();
     const auto& collection = SortsController::Get().GetSortCollection();

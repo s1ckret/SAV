@@ -45,7 +45,7 @@ void CountingSort::Begin()
 		m_dataRndr->RenderIterator( "i", i, 0x00ff00 );
 		unsigned int index = count_array[m_array[i]] - 1;
 		--count_array[m_array[i]];
-		sorted_array[index] = m_array[i];
+		m_dataCtrl->Assign(sorted_array[index], m_array[i]);
 
 	}
 	m_dataRndr->RemoveIterator( "i" );
@@ -53,7 +53,7 @@ void CountingSort::Begin()
 	LOG_TRACE( "Copying sorted array to main array..." );
 	for ( unsigned int i = 0; i < size; i++ ) {
 		m_dataRndr->RenderIterator( "i", i, 0x0000ff );
-		m_array[i] = sorted_array[i];
+        m_dataCtrl->Assign(m_array[i], sorted_array[i]);
 	}
 	m_dataRndr->RemoveIterator( "i" );
 

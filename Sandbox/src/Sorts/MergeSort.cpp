@@ -46,14 +46,14 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 	for (unsigned int i = 0; i < sizeLeft; i++) 
 	{
 		m_dataRndr->RenderIterator( "i", left + i, 0xff0000 );
-		tempLeft[i] = m_array[left + i];
+		m_dataCtrl->Assign(tempLeft[i], m_array[left + i]);
 	}
 	LOG_TRACE( "Copying into right auxillary array..." );
 	// Copy data into Right array
 	for (unsigned int i = 0; i < sizeRight; i++) 
 	{
 		m_dataRndr->RenderIterator( "i", mid + i + 1, 0x0000ff );
-		tempRight[i] = m_array[mid + i + 1];
+		m_dataCtrl->Assign(tempRight[i], m_array[mid + i + 1]);
 	}
 	m_dataRndr->RemoveIterator( "i" );
 	LOG_TRACE( "Merging..." );
@@ -66,12 +66,12 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 
 		if (m_dataCtrl->CmpLess(tempLeft[i], tempRight[j]))
 		{
-			m_array[k] = tempLeft[i];
+			m_dataCtrl->Assign(m_array[k], tempLeft[i]);
 			i++;
 		}
 		else
 		{
-			m_array[k] = tempRight[j];
+			m_dataCtrl->Assign(m_array[k], tempRight[j]);
 			j++;
 		}
 		k++;
@@ -81,7 +81,7 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 	while (i < sizeLeft)
 	{
 		m_dataRndr->RenderIterator( "i", left + i, 0xff0000 );
-		m_array[k] = tempLeft[i];
+		m_dataCtrl->Assign(m_array[k], tempLeft[i]);
 		i++;
 		k++;
 	}
@@ -90,7 +90,7 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 	while (j < sizeRight)
 	{
 		m_dataRndr->RenderIterator( "j", mid + i, 0x0000ff );
-		m_array[k] = tempRight[j];
+        m_dataCtrl->Assign(m_array[k], tempRight[j]);
 		j++;
 		k++;
 	}

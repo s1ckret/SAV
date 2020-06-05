@@ -20,15 +20,19 @@ class IDataController {
 
   virtual void Swap(int &lhs, int &rhs);
 
+  virtual void Assign(int &lhs, const int &rhs);
+
   virtual void Shuffle();
 
   void ResetCounters();
 
   unsigned GetCmpCount() const;
   unsigned GetSwapCount() const;
+  unsigned GetAssignmentCount() const;
 
  protected:
   Array m_array;
   unsigned m_cmp_count;
   unsigned m_swap_count;
+  unsigned m_assignment_count;
 };
