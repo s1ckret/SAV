@@ -5,8 +5,9 @@
 class BubbleSort : public ISort
 {
 public:
-	BubbleSort(Array & array, std::shared_ptr<IDataRenderer> & dataRednderer);
-    ~BubbleSort();
+  BubbleSort(std::shared_ptr<IDataController>& dataController,
+        std::shared_ptr<IDataRenderer>& dataRednderer);
+  ~BubbleSort();
 
 	void Begin() override;
 private:

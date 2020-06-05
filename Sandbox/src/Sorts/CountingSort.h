@@ -5,7 +5,8 @@
 class CountingSort : public ISort
 {
 public:
-	CountingSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednderer );
+  CountingSort(std::shared_ptr<IDataController>& dataController, 
+               std::shared_ptr<IDataRenderer>& dataRednderer);
 	void Begin() override;
 private:
 };

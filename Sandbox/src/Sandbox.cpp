@@ -18,13 +18,13 @@ void Sandbox::InitUser() {
   m_dataCtrl->Generate(m_arraySize);
   m_dataRndr = std::make_shared<BasicDataRenderer>(&m_dataCtrl->GetData(), m_arraySize);
   SortsController::Get().AddSort(
-      std::make_shared<BubbleSort>(m_dataCtrl->GetData(), m_dataRndr));
+      std::make_shared<BubbleSort>(m_dataCtrl, m_dataRndr));
   SortsController::Get().AddSort(
-      std::make_shared<CountingSort>(m_dataCtrl->GetData(), m_dataRndr));
+      std::make_shared<CountingSort>(m_dataCtrl, m_dataRndr));
   SortsController::Get().AddSort(
-      std::make_shared<QuickLSort>(m_dataCtrl->GetData(), m_dataRndr));
+      std::make_shared<QuickLSort>(m_dataCtrl, m_dataRndr));
   SortsController::Get().AddSort(
-      std::make_shared<MergeSort>(m_dataCtrl->GetData(), m_dataRndr));
+      std::make_shared<MergeSort>(m_dataCtrl, m_dataRndr));
 }
 
 App* CreateApp() { return new Sandbox; }
