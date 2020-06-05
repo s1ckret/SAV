@@ -24,9 +24,9 @@ void BubbleSort::Begin()
         for (unsigned int j = 0; j < m_array.Size() - i - 1; j++)
         {
             m_dataRndr->RenderIterator("j", j, 0xff0f00);
-            if (m_array[j] > m_array[j + 1])
+            if (m_dataCtrl->CmpGreater(m_array[j], m_array[j + 1]))
             {
-                std::swap(m_array[j], m_array[j + 1]);
+              m_dataCtrl->Swap(m_array[j], m_array[j + 1]);
             }
         }
         m_dataRndr->MarkColor(m_array.Size() - i - 1, 0x00ff00);

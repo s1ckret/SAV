@@ -22,7 +22,7 @@ void MergeSort::Begin()
 
 void MergeSort::MergeSortBegin(unsigned int left, unsigned int right)
 {
-	if (left < right)
+	if (m_dataCtrl->CmpLess(left, right))
 	{
 		unsigned int mid = (left + right) / 2;
 
@@ -64,7 +64,7 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 		m_dataRndr->RenderIterator( "i", left + i, 0xff0000 );
 		m_dataRndr->RenderIterator( "j", mid + i + 1, 0x0000ff );
 
-		if (tempLeft[i] < tempRight[j])
+		if (m_dataCtrl->CmpLess(tempLeft[i], tempRight[j]))
 		{
 			m_array[k] = tempLeft[i];
 			i++;

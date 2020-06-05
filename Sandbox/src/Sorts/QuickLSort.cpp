@@ -22,7 +22,7 @@ void QuickLSort::Begin()
 
 void QuickLSort::QuickLSortBegin(int left, int right)
 {
-	if (left < right)
+	if (m_dataCtrl->CmpLess(left, right))
 	{
 		int pivot_index = Partition(left, right);
 
@@ -40,16 +40,16 @@ int QuickLSort::Partition(int left, int right)
 	for (unsigned int j = left; j < right; j++)
 	{
 		m_dataRndr->RenderIterator( "j", j, 0xFFA07A );
-		if (m_array[j] < pivot)
+        if (m_dataCtrl->CmpLess(m_array[j], pivot))
 		{
 			i++;
-			std::swap(m_array[j], m_array[i]);
+			m_dataCtrl->Swap(m_array[j], m_array[i]);
 		}
 	}
 	m_dataRndr->RemoveIterator( "j" );
 
 	i++;
-    std::swap(m_array[right], m_array[i]);
+    m_dataCtrl->Swap(m_array[right], m_array[i]);
 
 	m_dataRndr->RemoveIterator( "left" );
 	m_dataRndr->RemoveIterator( "right" );

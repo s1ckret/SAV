@@ -108,13 +108,21 @@ void App::ImguiRenderLayer() {
     if (ImGui::Button("Generate", {96, 25}) && dirtyFlag) {
       m_dataCtrl->Generate(m_arraySize);
       m_dataRndr->SetData(&m_dataCtrl->GetData());
+      m_dataCtrl->ResetCounters();
       LOG_INFO("New Array has generated!");
     }
     ImGui::SameLine();
     if (ImGui::Button("Shuffle", {96, 25}) && dirtyFlag) {
       m_dataRndr->Reset();
+      m_dataCtrl->ResetCounters();
       m_dataCtrl->Shuffle();
     }
+    ImGui::Text((std::string("Swap count: ") +
+                 std::to_string(m_dataCtrl->GetSwapCount()))
+                    .c_str());
+    ImGui::Text((std::string("Compare count: ") +
+                 std::to_string(m_dataCtrl->GetCmpCount()))
+                    .c_str());
 
     ImGui::NewLine();
     const auto& collection = SortsController::Get().GetSortCollection();
