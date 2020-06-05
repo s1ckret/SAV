@@ -139,6 +139,7 @@ void App::ImguiRenderLayer() {
         LOG_INFO("{0} is choosed!", collection[i]->GetName().c_str());
         SortsController::Get().BeginSort();
         LOG_INFO("{0} has started!", collection[i]->GetName().c_str());
+        dirtyFlag = 0;
       }
     }
 

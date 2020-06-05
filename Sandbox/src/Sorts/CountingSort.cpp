@@ -13,7 +13,6 @@ CountingSort::CountingSort(std::shared_ptr<IDataController>& dataController,
 
 void CountingSort::Begin()
 {
-	dirtyFlag = 0;
 	int max = m_array.GetMaxValue( );
 	unsigned size = m_array.Size( );
 	LOG_TRACE( "Max value: {0}", max );
@@ -60,6 +59,5 @@ void CountingSort::Begin()
 	m_dataCtrl->Free( count_array );
 	m_dataRndr->DisplaySorted( );
 	LOG_INFO("I am sorted !");
-	dirtyFlag = 1;
 }
 
