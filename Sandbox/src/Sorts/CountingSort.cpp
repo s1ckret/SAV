@@ -20,10 +20,8 @@ void CountingSort::Begin()
 	LOG_TRACE( "Size: {0}", size );
 	max++;
 
-	unsigned int * count_array = (unsigned int*)malloc(sizeof(unsigned int) * max);
-	int * sorted_array = (int*)malloc(sizeof(int) * size);
-	memset(count_array, 0, sizeof(unsigned int) * max);
-	memset(sorted_array, 0, sizeof(int) * size );
+	int* count_array = m_dataCtrl->Allocate(max);
+    int* sorted_array = m_dataCtrl->Allocate(size);
 
 	LOG_TRACE( "Counting..." );
 	for (unsigned int i = 0; i < size; i++)
@@ -58,8 +56,8 @@ void CountingSort::Begin()
 	m_dataRndr->RemoveIterator( "i" );
 
 	
-	free( sorted_array );
-	free( count_array );
+	m_dataCtrl->Free( sorted_array );
+	m_dataCtrl->Free( count_array );
 	m_dataRndr->DisplaySorted( );
 	LOG_INFO("I am sorted !");
 	dirtyFlag = 1;

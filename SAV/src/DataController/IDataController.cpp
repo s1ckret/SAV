@@ -39,6 +39,16 @@ void IDataController::Assign(int& lhs, const int& rhs) {
 }
  
 
+int* IDataController::Allocate(int count) {
+  count *= sizeof(int);
+  int* data = (int*)malloc(count);
+  memset(data, 0, count);
+  m_bytes_allocated_count += count;
+  return data;
+}
+
+void IDataController::Free(int* ptr) { free(ptr); }
+
 void IDataController::Shuffle() {
     std::random_device rd;
     std::mt19937 generator(rd());
@@ -49,10 +59,17 @@ void IDataController::ResetCounters() {
   m_cmp_count = 0;
   m_swap_count = 0;
   m_assignment_count = 0;
+  m_bytes_allocated_count = 0;
 }
 
 unsigned IDataController::GetCmpCount() const { return m_cmp_count; }
 
 unsigned IDataController::GetSwapCount() const { return m_swap_count; }
 
-unsigned IDataController::GetAssignmentCount() const { return m_assignment_count; }
+unsigned IDataController::GetAssignmentCount() const {
+  return m_assignment_count;
+}
+
+unsigned IDataController::GetBytesAllocated() const {
+  return m_bytes_allocated_count;
+}

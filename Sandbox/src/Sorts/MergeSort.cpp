@@ -39,8 +39,8 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 	unsigned int sizeLeft = mid - left + 1;
 	unsigned int sizeRight = right - mid;
 	// Createing temporaly arrays
-	int *tempLeft = new int [sizeLeft];
-	int *tempRight = new int[sizeRight];
+	int *tempLeft = m_dataCtrl->Allocate(sizeLeft + 1);
+    int *tempRight = m_dataCtrl->Allocate(sizeRight + 1);
 	LOG_TRACE( "Copying into left auxillary array..." );
 	// Copy data into Left array
 	for (unsigned int i = 0; i < sizeLeft; i++) 
@@ -97,6 +97,6 @@ void MergeSort::Merge(unsigned int left, unsigned int mid, unsigned int right)
 	m_dataRndr->RemoveIterator( "i" );
 	m_dataRndr->RemoveIterator( "j" );
 
-	delete[] tempLeft;
-	delete[] tempRight;
+	m_dataCtrl->Free(tempLeft);
+	m_dataCtrl->Free(tempRight);
 }

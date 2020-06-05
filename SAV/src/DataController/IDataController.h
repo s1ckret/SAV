@@ -20,7 +20,13 @@ class IDataController {
 
   virtual void Swap(int &lhs, int &rhs);
 
+  // Lhs = Rhs
   virtual void Assign(int &lhs, const int &rhs);
+
+  // Allocates @count ints
+  virtual int *Allocate(int count);
+
+  virtual void Free(int *ptr);
 
   virtual void Shuffle();
 
@@ -29,10 +35,11 @@ class IDataController {
   unsigned GetCmpCount() const;
   unsigned GetSwapCount() const;
   unsigned GetAssignmentCount() const;
-
+  unsigned GetBytesAllocated() const;
  protected:
   Array m_array;
   unsigned m_cmp_count;
   unsigned m_swap_count;
   unsigned m_assignment_count;
+  unsigned m_bytes_allocated_count;
 };
