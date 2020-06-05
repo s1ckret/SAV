@@ -4,7 +4,7 @@
 
 class IDataController {
  public:
-  IDataController() = default;
+  IDataController();
   virtual ~IDataController() = default;
 
   inline Array &GetData() { return m_array; }

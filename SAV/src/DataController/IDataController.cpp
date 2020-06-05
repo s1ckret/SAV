@@ -3,6 +3,9 @@
 #include <random>
 #include <algorithm>
 
+IDataController::IDataController()
+    : m_cmp_count(0), m_swap_count(0), m_assignment_count(0) {}
+
 void IDataController::Generate(unsigned int size) {
     m_array.Resize(size);
 
