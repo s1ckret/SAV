@@ -16,7 +16,7 @@ Sandbox::~Sandbox() {}
 void Sandbox::InitUser() {
   m_dataCtrl = std::make_shared<BasicDataController>();
   m_dataCtrl->Generate(m_arraySize);
-  m_dataRndr = std::make_shared<BasicDataRenderer>(&m_dataCtrl->GetData(), m_arraySize);
+  m_dataRndr = std::make_shared<BasicDataRenderer>(&m_dataCtrl->GetData(), m_delay);
   SortsController::Get().AddSort(
       std::make_shared<BubbleSort>(m_dataCtrl, m_dataRndr));
   SortsController::Get().AddSort(
