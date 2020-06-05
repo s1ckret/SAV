@@ -1,11 +1,12 @@
 #pragma once
 
-#include "ISort.h"
+#include "SAV.h"
 
 class MergeSort : public ISort
 {
 public:
-	MergeSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednderer );
+  MergeSort(std::shared_ptr<IDataController>& dataController,
+            std::shared_ptr<IDataRenderer>& dataRednderer);
 
 	void Begin() override;
 private:

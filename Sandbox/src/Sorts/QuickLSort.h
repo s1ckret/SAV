@@ -1,11 +1,12 @@
 #pragma once
 
-#include "ISort.h"
+#include "SAV.h"
 
 class QuickLSort : public ISort
 {
 public:
-	QuickLSort( Array &array, std::shared_ptr<IDataRenderer> &dataRednderer );
+  QuickLSort(std::shared_ptr<IDataController>& dataController,
+             std::shared_ptr<IDataRenderer>& dataRednderer);
 
 	void Begin() override;
 private:
