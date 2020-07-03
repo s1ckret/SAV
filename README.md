@@ -2,6 +2,8 @@
 # SAV
 SAV or Sorting Algorithms Visualization it is software that helps to see what is going on inside of sorting algorithm.
 
+> [Demo on YouTube](https://youtu.be/6ctR5VJL6_Q)
+
 ## Dependencies
 Make sure you have installed:
    - OpenGL
